@@ -7,8 +7,13 @@ interface HistoryPrps {
     shopHistory: Date[]
 }
 const History = ({ shopHistory }: HistoryPrps) => {
-    const { showHistory, reversedHistory, handleShowHistory } = useShowHistory(shopHistory)
+    const { showHistory, reversedHistory, handleShowHistory } = useShowHistory({ shopHistory })
     const { formatedDate, getDays } = useFormatedDate()
+
+    if (!reversedHistory || reversedHistory.length === 0) {
+        return <div className='w-full'>No hay historial disponible.</div>
+    }
+
 
     const firstDate = reversedHistory[0]
     const secondDate = reversedHistory[1]
@@ -48,7 +53,7 @@ const History = ({ shopHistory }: HistoryPrps) => {
                         : (
                             <>
                                 {Number(getDays({ date: firstDate })) < 1 && <h2 className='font bold text-center md:text-2xl'>Nuevo en Fortnite</h2>}
-                                <DateComponent fullDate={formatedDate(reversedHistory[0])} dayss={getDays(reversedHistory[0])} />
+                                <DateComponent fullDate={formatedDate({ date: firstDate })} dayss={getDays({ date: firstDate })} />
                             </>
                         )
             }

@@ -28,7 +28,6 @@ const useSearch = () => {
     const handleSubmit = ({ e }: { e: FormEvent<HTMLFormElement> }) => {
         e.preventDefault()
 
-        console.log(stats)
         const params = new URLSearchParams()
 
         if (stats.user.trim() === '' || stats.type.trim() === '') {
@@ -39,7 +38,6 @@ const useSearch = () => {
             setStats({ ...stats, isEmpty: false })
             replace(`${pathname}?${params.toString()}`)
         }
-        // resetStats()
 
     }
 

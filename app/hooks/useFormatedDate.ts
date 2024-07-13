@@ -19,7 +19,7 @@ export function useFormatedDate() {
         []
     )
     const getDays = useCallback(
-        ({ date }: { date: string }) => {
+        ({ date }: { date: string | Date }) => {
             if (!date) return 'Cargando..'
             const fechaInicio = new Date()
             const fechaFin = new Date(date)
