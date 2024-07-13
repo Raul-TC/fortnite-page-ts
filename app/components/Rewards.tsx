@@ -7,7 +7,7 @@ export const Rewards = React.memo(({ rewardsData }: { rewardsData: Reward[] }) =
     return (
         rewardsData.map(pag => {
             return (
-                <Link key={pag.offerId} className='relative w-full h-full rounded-md overflow-hidden' href={`/cosmetics/${pag.offerId}${pag.item.id}`}>
+                <Link key={pag.offerId} className='relative w-full h-full rounded-md overflow-hidden' href={`/cosmetics/${pag.item.id}`}>
                     <img
                         src={pag.item.images.icon || pag.item.images.background}
                         alt={`image_${pag.item.name}`}
