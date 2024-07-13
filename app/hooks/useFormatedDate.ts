@@ -5,7 +5,6 @@ export function useFormatedDate() {
 
         ({ date }: { date: string | Date }) => {
 
-            console.log(date)
             if (!date) return 'Cargando..'
             const formatedDate = typeof date === 'string' ? date.replaceAll('-', ',') : date
 
