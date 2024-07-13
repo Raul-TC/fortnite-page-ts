@@ -89,7 +89,7 @@ export async function getBattlePass(): Promise<{ arr: ArrData[], info: Display, 
         const res: BattlePass = await fetchWithHeaders(URL_BPASS, {
             'Content-Type': 'application/json',
             Authorization: process.env.API_FORTNITE || ''
-        })
+        }, { cache: 'no-store' })
 
         const pagesBattlePass: PagesBattlePass = {}
         const pages: number[] = [...new Set(res.rewards.map((item: Reward) => item.page))]
@@ -249,11 +249,10 @@ export async function getItem({ idSkin }: { idSkin: string }): Promise<Item> {
 
         const { series } = await getRarities()
 
-
         const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
-
+        console.log(item)
         const addBg = () => {
-            const bgImage = seriesMap[item.series?.name.toUpperCase() || ''] || ''
+            const bgImage = seriesMap[item?.series?.name.toUpperCase() || ''] || ''
             let precio = item.price
             return {
                 ...item, bg: bgImage, price: { regularPrice: precio, finalPrice: precio, floorPrice: precio }
