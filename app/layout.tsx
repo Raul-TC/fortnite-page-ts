@@ -5,6 +5,7 @@ import './hamburguer.css'
 import Header from "./components/Header";
 
 import { balsamiqSans } from './assets/fonts'
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +20,8 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <div className='w-[95%] max-w-[1440px] m-auto  mt-[100px] min-h-[95vh]'>
           {children}
         </div>
+        <footer className='w-full text-center fixed bottom-0 h-[40px] mt-[50px] bg-bg-header flex items-center justify-center z-[20] gap-1'>Made by  <Link href='https://github.com/Raul-TC' className='text-red-400'>Raul-TC 💖</Link> </footer>
+
       </body>
     </html>
   );
