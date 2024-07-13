@@ -9,7 +9,6 @@ const ItemsShop = async () => {
     const { shop, lastUpdated } = await getShop()
 
     let lastShop = new Date(lastUpdated.date)
-    console.log(lastShop)
     const filterItemsByBackground = ({ arrayObjects }: { arrayObjects: DisplayAsset[] }) => {
         const seenBackgrounds = new Set();
         return arrayObjects.filter(item => {

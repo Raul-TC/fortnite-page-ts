@@ -20,7 +20,7 @@ export const SectionShop = ({ el }: SectionShopProps) => {
     const filteredData = el.data.slice(0, visibleItems);
 
     return (
-        <section id={`${el.section}`} className='pb-4 w-full h-full'>
+        <section id={`${el.section}`} className='pb-4 w-full'>
             <h2 className={`${luckiestGuy.className} text-2xl text-center font-bold mt-4 mb-4 md:text-3xl `}>{el.section}</h2>
             <div className='text-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 h-full w-full'>
                 {filteredData.map((child, index) => {
