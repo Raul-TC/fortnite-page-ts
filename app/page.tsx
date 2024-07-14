@@ -5,7 +5,7 @@ import Pagination from "./components/Pagination";
 import BattlePass from "./components/BattlePass";
 
 export const metadata = {
-  title: 'Inicio',
+  title: 'Pase de Batalla',
   description: 'Pase de Batalla Actual de Fortnite',
   icons: { shortcut: 'https://cdn.marketing.on.epicgames.com/fortnite/webpack/../favicon.ico' },
   facebook: {
