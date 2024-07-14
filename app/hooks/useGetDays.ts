@@ -1,5 +1,4 @@
 import { useCallback } from "react"
-import { useDates } from "./useDates"
 
 export interface GetDayResultProps {
     days: string;
@@ -9,8 +8,7 @@ export interface GetDayResultProps {
 }
 
 export function useGetDay() {
-    const { currentShop } = useDates()
-    const currentDate = currentShop ? new Date(currentShop).toLocaleDateString() : '';
+    // const currentDate = currentShop ? new Date(currentShop).toLocaleDateString() : '';
 
     const getDay = useCallback(
         ({ dia }: { dia: string | Date }): GetDayResultProps => {
@@ -44,5 +42,6 @@ export function useGetDay() {
             return { days: days[day], day: currentDayNow.getDate(), months: months[month], year: currentDayNow.getFullYear() }
         }, [])
 
-    return { getDay, currentDate }
+    return { getDay }
+    // return { getDay, currentDate }
 }

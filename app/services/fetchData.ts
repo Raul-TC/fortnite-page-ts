@@ -99,6 +99,7 @@ export async function getBattlePass(): Promise<{ arr: ArrData[], info: Display, 
 
         const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
 
+        console.log(res)
         const addBg = res.rewards.map((el: Reward) => {
             const bgDefault = raritiesMap[el.item.rarity?.name.toUpperCase()] || ''
 
@@ -267,3 +268,4 @@ export async function getItem({ idSkin }: { idSkin: string }): Promise<Item> {
     }
 
 }
+

@@ -21,7 +21,8 @@ const BattlePass = React.memo(({ currentPage, arr, info, seasonDates, videos }: 
         <>
             <h1 className='text-center font-bold text-2xl md:text-4xl'>{info.chapterSeason}</h1>
             <div className='flex flex-col self-start items-center justify-center w-full rounded-md top-0 left-0 right-0'>
-                <CurrentDay date={seasonDates.end} isShop={false} />
+                <CurrentDay date={seasonDates.begin} isShop={false} title='Inicio de Temporada' />
+                <CurrentDay date={seasonDates.end} isShop={false} title='Fin de Temporada' />
                 <CountDown isShop={false} date={seasonDates.end} />
             </div>
             <div className=' flex items-center justify-between w-full'>
