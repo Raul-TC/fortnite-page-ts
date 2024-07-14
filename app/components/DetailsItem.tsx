@@ -19,7 +19,7 @@ type RarityType = 'Common' | 'Rare' | 'Uncommon' | 'Epic' | 'Legendary';
 const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
 
     const { formatedDate } = useFormatedDate()
-    const { id, name, description, introduction, releaseDate, shopHistory, series, type, set, images, displayAssets, rarity, price, bg, grants } = await getItem({ idSkin: itemID })
+    const { id, name, description, introduction, releaseDate, shopHistory, series, type, set, images, displayAssets, rarity, price, bg, grants, battlepass, added } = await getItem({ idSkin: itemID })
 
     const rarityColorMap = {
         Common: 'border-green-500',
@@ -84,8 +84,11 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
                                 </p>
                                 <Image src={vBuck} alt='vBuck_coin' width={50} height={50} className='w-9 h-9' />
                             </div>)}
-                        {releaseDate && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{formatedDate({ date: new Date(releaseDate) }).replaceAll('-', '.')}</span></p>}
-                        {introduction && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Aparición: <span className='text-white'>{introduction.chapter} {introduction.season}</span> </p>}
+                        {(releaseDate || added) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{formatedDate({ date: new Date(releaseDate || added.date) }).replaceAll('-', '.')}</span></p>}
+                        {(introduction) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Aparición: <span className='text-white'>{introduction?.chapter} {introduction?.season}</span> </p>}
+                        {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Skin de pase de Batalla: <span className='text-white'>{battlepass?.displayText.chapter} {battlepass?.displayText.season}</span> </p>}
+                        {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Metodo de Obtención: <span className='text-white'>{battlepass.type === 'paid' ? 'Comprando el Pase' : 'Gratis en el Pase'} </span> </p>}
+                        {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Página: <span className='text-white'>{battlepass.page}</span> </p>}
                         {series && <p className=' font-bold text-center md:text-2xl text-gray-500 self-start'>Serie:<span className='self-start font-normal capitalize'> <span className='text-white'>{(series.name).substring(6)}</span></span></p>}
                         <div className='flex flex-col h-full w-full justify-center items-start'>
                             <History shopHistory={shopHistory} />

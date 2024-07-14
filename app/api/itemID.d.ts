@@ -16,7 +16,7 @@ export interface RawItem {
     copyrightedAudio?: boolean;
     upcoming?: boolean;
     reactive?: boolean;
-    releaseDate: Date;
+    releaseDate?: Date;
     lastAppearance: Date;
     interest?: number;
     images: Images;
@@ -27,9 +27,8 @@ export interface RawItem {
     gameplayTags?: string[];
     apiTags?: any[];
     searchTags?: any[];
-    battlepass: null;
     set: Set;
-    introduction: Introduction;
+    introduction?: Introduction;
     displayAssets: DisplayAsset[];
     shopHistory: Date[];
     styles?: Style[];
@@ -37,6 +36,18 @@ export interface RawItem {
     grants: Grant[];
     grantedBy: any[];
     bg: string
+    battlepass?: {
+        season: number,
+        tier: number,
+        page: number,
+        type: string,
+        displayText: {
+            chapter: string,
+            season: string,
+            chapterSeason: string
+        },
+        battlePassName: string
+    }
 }
 
 export interface Price {

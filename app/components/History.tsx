@@ -11,7 +11,7 @@ const History = ({ shopHistory }: HistoryPrps) => {
     const { formatedDate, getDays } = useFormatedDate()
 
     if (!reversedHistory || reversedHistory.length === 0) {
-        return <div className='w-full'>No hay historial disponible.</div>
+        return
     }
 
 
