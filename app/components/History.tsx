@@ -10,10 +10,10 @@ const History = ({ shopHistory }: HistoryPrps) => {
     const { showHistory, handleShowHistory } = useShowHistory()
     const { formatedDate, getDays } = useFormatedDate()
 
-    const reversedHistory = shopHistory.toReversed()
-    const firstDate = reversedHistory[0]
-    const secondDate = reversedHistory[1]
-    const thirthDate = reversedHistory[2]
+    const reversedHistory = shopHistory?.toReversed()
+    const firstDate = shopHistory && reversedHistory[0]
+    const secondDate = shopHistory && reversedHistory[1]
+    const thirthDate = shopHistory && reversedHistory[2]
 
     return (
         <div className='w-full'>
