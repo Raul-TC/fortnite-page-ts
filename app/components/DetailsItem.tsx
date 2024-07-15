@@ -8,6 +8,7 @@ import Image from 'next/image'
 import BackgroundCard from './BackgroundCard'
 import vBuck from '../assets/vBuckPNG.png'
 import History from './History'
+import useLocaleDateConvert from '../hooks/useLocaleDateConvert'
 
 
 interface DetailsItemsProps {
@@ -34,6 +35,8 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
     }
 
     const rarityColor = rarityColorMap[rarity.id as RarityType] || ''
+    const { handleLocalDate } = useLocaleDateConvert()
+
     return (
         <>
             {bg && <img src={bg} className='fixed bottom-0 w-full left-0 object-cover top-0 h-[100vh] -z-0 opacity-55 blur-sm' alt='' />}
@@ -84,7 +87,7 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
                                 </p>
                                 <Image src={vBuck} alt='vBuck_coin' width={50} height={50} className='w-9 h-9' />
                             </div>)}
-                        {(releaseDate || added) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{formatedDate({ date: new Date(releaseDate || added.date) }).replaceAll('-', '.')}</span></p>}
+                        {(releaseDate || added) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{handleLocalDate({ fecha: new Date(releaseDate || added.date), onlyDate: true }).replaceAll('-', '.')}</span></p>}
                         {(introduction) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Aparición: <span className='text-white'>{introduction?.chapter} {introduction?.season}</span> </p>}
                         {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Skin de pase de Batalla: <span className='text-white'>{battlepass?.displayText.chapter} {battlepass?.displayText.season}</span> </p>}
                         {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Metodo de Obtención: <span className='text-white'>{battlepass.type === 'paid' ? 'Comprando el Pase' : 'Gratis en el Pase'} </span> </p>}

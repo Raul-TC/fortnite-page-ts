@@ -1,5 +1,6 @@
-import { useFormatedEndDate } from "../hooks/useFormatedEndDate"
-import { useGetDay } from "../hooks/useGetDays"
+// import { useFormatedEndDate } from "../hooks/useFormatedEndDate"
+// import { useGetDay } from "../hooks/useGetDays"
+import useLocaleDateConvert from "../hooks/useLocaleDateConvert"
 
 interface CurrentDayProps {
     date: string | Date,
@@ -7,27 +8,29 @@ interface CurrentDayProps {
     title?: string
 }
 const CurrentDay = ({ date, isShop, title }: CurrentDayProps) => {
-    const { dateFormated } = useFormatedEndDate({ dateProp: date })
+    // const { dateFormated } = useFormatedEndDate({ dateProp: date })
+    const { handleLocalDate } = useLocaleDateConvert()
 
-    const targetDate = dateFormated
+    // const { currentShop } = useDates({ date: date ?? '' })
+    // console.log(dateFormated)
 
-    const { getDay } = useGetDay()
-    const currentDate = dateFormated ? new Date(dateFormated).toLocaleDateString() : '';
+    // const targetDate = currentShop 
+
+    // const { getDay } = useGetDay()
+    // const currentDate = currentShop ? currentShop : '';
 
     // Asegurarse de que targetDate es válido antes de pasarlo a getDay
-    const dateDetails = targetDate ? getDay({ dia: targetDate }) : undefined;
-
+    // const dateDetails = currentShop ? getDay({ dia: currentShop }) : undefined;
     // Desestructurar solo si dateDetails existe y es válido
-    const { days, day, months, year } = dateDetails || {};
+    // const { days, day, months, year } = dateDetails || {};
 
     return (
         <div className='font-bold m-auto text-center flex-col  flex items-center justify-center'>
-            <h1 className={`${isShop ? 'text-xl md:text-xl' : 'text-2xl'} text-lg font-bold self-start text-yellowForrnite italic`}>
-                {currentDate === 'Invalid Date' || !dateDetails
-                    ? 'Cargando Fecha'
-                    : isShop
-                        ? <>Tienda del {days} {day} {months} {year}</>
-                        : <>{title}: {days} {day} {months} {year}</>}
+            <h1 className={`${isShop ? 'text-xl md:text-xl' : 'text-2xl'} text-lg font-bold self-start text-white `}>
+                {!date
+                    ? 'Cargando Fecha...'
+                    : <><span className="text-gray-500">{title}:</span> {handleLocalDate({ fecha: date, onlyDate: false })}</>}
+                {/* : <>{title}: {days} {day} {months} {year}</>} */}
             </h1>
         </div>
     )

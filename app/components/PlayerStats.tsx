@@ -1,6 +1,7 @@
 import StatCard from './StatCard'
 import { luckiestGuy } from '../assets/fonts'
 import { getStats } from '../services/fetchData'
+import useLocaleDateConvert from '../hooks/useLocaleDateConvert'
 
 interface PlayerStatsProps {
     name: string,
@@ -24,22 +25,22 @@ const PlayerStats = async ({ name, accountType }: PlayerStatsProps) => {
         return dias === 0 ? `${horas} horas ${minutos} minutos` : `${dias} dias ${horas} horas ${minutos} minutos`
     }
 
-    const handleLocalDate = ({ fecha }: { fecha: string }) => {
-        const date = new Date(fecha)
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
-            hour12: true,
-            timeZone: 'America/Monterrey'
-        }
+    // const handleLocalDate = ({ fecha }: { fecha: string }) => {
+    //     const date = new Date(fecha)
+    //     const options: Intl.DateTimeFormatOptions = {
+    //         year: 'numeric',
+    //         month: 'long',
+    //         day: 'numeric',
+    //         hour: 'numeric',
+    //         minute: 'numeric',
+    //         second: 'numeric',
+    //         hour12: true,
+    //         timeZone: 'America/Monterrey'
+    //     }
 
-        return date.toLocaleString('es-MX', options)
-    }
-
+    //     return date.toLocaleString('es-MX', options)
+    // }
+    const { handleLocalDate } = useLocaleDateConvert()
     return (
         <div className='mt-4'>
             <div className='mt-2 mb-4'>

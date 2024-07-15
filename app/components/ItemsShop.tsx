@@ -54,11 +54,11 @@ const ItemsShop = async () => {
         )
         return { ...el, data: sorted }
     })
-
+    let date = new Date(`${lastUpdated.date}Z`)
     return (
         <>
 
-            <CurrentDay date={lastUpdated.date} isShop />
+            <CurrentDay date={date} isShop title="Última Actualización" />
             {sortedItems && sortedItems.map((el, sectionIndex) => {
                 return <SectionShop key={`${el.section}_${sectionIndex}`} el={el} />
             })}

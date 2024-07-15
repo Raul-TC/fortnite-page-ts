@@ -7,14 +7,10 @@ interface HistoryPrps {
     shopHistory: Date[]
 }
 const History = ({ shopHistory }: HistoryPrps) => {
-    const { showHistory, reversedHistory, handleShowHistory } = useShowHistory({ shopHistory })
+    const { showHistory, handleShowHistory } = useShowHistory()
     const { formatedDate, getDays } = useFormatedDate()
 
-    if (!reversedHistory || reversedHistory.length === 0) {
-        return
-    }
-
-
+    const reversedHistory = shopHistory.toReversed()
     const firstDate = reversedHistory[0]
     const secondDate = reversedHistory[1]
     const thirthDate = reversedHistory[2]
