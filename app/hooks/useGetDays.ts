@@ -8,11 +8,9 @@ export interface GetDayResultProps {
 }
 
 export function useGetDay() {
-    // const currentDate = currentShop ? new Date(currentShop).toLocaleDateString() : '';
-
     const getDay = useCallback(
         ({ dia }: { dia: string | Date }): GetDayResultProps => {
-            const currentDayNow = new Date(dia ?? new Date().toISOString());
+            const currentDayNow = dia ? new Date(dia) : new Date();
             const day = currentDayNow.getDay()
             const month = currentDayNow.getMonth()
 
@@ -43,5 +41,4 @@ export function useGetDay() {
         }, [])
 
     return { getDay }
-    // return { getDay, currentDate }
 }

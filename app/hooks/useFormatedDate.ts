@@ -12,7 +12,8 @@ export function useFormatedDate() {
             const day = today.getDate().toString()
             const month = (today.getMonth() + 1).toString()
             const year = today.getFullYear().toString()
-            const finalDate = `${month.length < 2 ? '0' + month : month}-${day.length < 2 ? '0' + day : day}-${year}`
+            // const finalDate = `${month.length < 2 ? '0' + month : month}-${day.length < 2 ? '0' + day : day}-${year}`
+            const finalDate = `${year}-${month.length < 2 ? '0' + month : month}-${day.length < 2 ? '0' + day : day}`
 
             return finalDate
         },
