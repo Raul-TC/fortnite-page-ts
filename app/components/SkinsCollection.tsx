@@ -1,23 +1,18 @@
-'use client'
-import { useCosmetics } from '../hooks/useCosmetics'
-import { FormattedItem, TypesCosmetics } from '../api/cosmetics'
-import { useExpandItem } from '../hooks/useExpandItem'
-import Menu from './Menu'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import BackgroundCard from './BackgroundCard'
-import Link from 'next/link'
+import { Suspense } from 'react'
+import { AllSkins } from './AllSkins'
+import { getCosmetics } from '../services/fetchData'
 
-interface SkinsCollectionsProps {
-    allItems: FormattedItem[],
-    rarities: TypesCosmetics
-}
 
-export const SkinsCollection = ({ allItems, rarities }: SkinsCollectionsProps) => {
-    const { data, filters, loadMoreData, handleFilters } = useCosmetics({ allItems })
-    const { expandedItem, handleExpandItem } = useExpandItem()
+export const SkinsCollection = async () => {
+    // export const SkinsCollection = ({ allItems, rarities }: SkinsCollectionsProps) => {
+    const { allItems, rarities } = await getCosmetics()
+
     return (
         <>
-            <div className='flex gap-4 flex-wrap  justify-between items-center'>
+            <Suspense fallback={<p>Cargando Skins...</p>}>
+                <AllSkins allItems={allItems} rarities={rarities} />
+            </Suspense>
+            {/* <div className='flex gap-4 flex-wrap  justify-between items-center'>
 
                 <input
                     name='searchSkin' placeholder='Jinx Arcane' className='bg-yellowForrnite text-bg-body py-2 px-4 rounded-md outline-none w-[50%]' onChange={(e) => {
@@ -59,6 +54,6 @@ export const SkinsCollection = ({ allItems, rarities }: SkinsCollectionsProps) =
                     }
                     )}
                 </div>
-            </InfiniteScroll>
+            </InfiniteScroll> */}
         </>)
 }

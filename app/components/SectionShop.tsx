@@ -28,7 +28,7 @@ export const SectionShop = ({ el }: SectionShopProps) => {
                         <Link
                             key={`${index}_${child.mainId}`}
                             href={`/cosmetics/${child.mainId}`}
-                            className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2' : ''}  text-sm rounded-md overflow-hidden self-start cursor-pointer w-full hover:scale-110 active:scale-90 hover:z-40 transition-transform ease-in-out duration-200`}
+                            className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2' : ''}  text-sm rounded-md overflow-hidden self-start cursor-pointer w-full lg:hover:scale-110 active:scale-90 hover:z-40 transition-transform ease-in-out duration-200`}
                         >
                             {child.displayAssets.length > 1 ? (
                                 <div className='flex w-full h-full overflow-hidden rounded-md flex-col items-center justify-center '>

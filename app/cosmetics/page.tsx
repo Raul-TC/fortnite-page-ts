@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
 import { SkinsCollection } from '@/app/components/SkinsCollection'
-import { getCosmetics } from '@/app/services/fetchData'
 import SkeletonCosmetics from '../components/SkeletonCosmetics'
 export const dynamic = 'auto'
 
@@ -16,10 +15,10 @@ export const metadata = {
 }
 
 const Cosmetics = async () => {
-    const { allItems, rarities } = await getCosmetics()
+    // const { allItems, rarities } = await getCosmetics()
     return (
         <Suspense fallback={<SkeletonCosmetics />}>
-            <SkinsCollection allItems={allItems} rarities={rarities} />
+            <SkinsCollection />
         </Suspense>
         // <h1>Collections</h1>
     )
