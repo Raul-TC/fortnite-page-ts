@@ -15,7 +15,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <div className='w-[95%] max-w-[1440px] m-auto  mt-[100px] md:min-h-[95vh]'>
           {children}
         </div>
-        <footer className='w-full text-center fixed bottom-0 h-[40px] mt-[50px] bg-bg-header flex items-center justify-center z-[20] gap-1'>Made by  <Link href='https://github.com/Raul-TC' className='text-red-400'>Raul-TC 💖</Link> </footer>
+        <footer className='w-full text-center fixed bottom-0 h-[40px] mt-[50px] bg-bg-header flex items-center justify-center z-[50] gap-1'>Made by  <Link href='https://github.com/Raul-TC' className='text-red-400'>Raul-TC 💖</Link> </footer>
 
       </body>
     </html>

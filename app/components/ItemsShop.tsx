@@ -4,7 +4,7 @@ import { getShop } from "../services/fetchData"
 import CurrentDay from "./CurrentDay"
 
 const ItemsShop = async () => {
-    const { shop, lastUpdated } = await getShop()
+    const { shop } = await getShop()
 
     const filterItemsByBackground = ({ arrayObjects }: { arrayObjects: DisplayAsset[] }) => {
         const seenBackgrounds = new Set();
@@ -54,11 +54,8 @@ const ItemsShop = async () => {
         )
         return { ...el, data: sorted }
     })
-    let date = new Date(`${lastUpdated.date}Z`)
     return (
         <>
-
-            <CurrentDay date={date} isShop title="Última Actualización" />
             {sortedItems && sortedItems.map((el, sectionIndex) => {
                 return <SectionShop key={`${el.section}_${sectionIndex}`} el={el} />
             })}

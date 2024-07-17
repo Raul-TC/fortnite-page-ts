@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 
 import Search from '../components/Search'
-import PlayerStats from '../components/PlayerStats'
+import PlayerStats from '../components/StatsPlayer'
 import SkeletonStats from '../components/SkeletonStats'
 export const dynamic = 'force-dynamic'
 
@@ -31,11 +31,10 @@ const Player = async ({ searchParams }: PlayerProps) => {
                 <Search />
             </div>
             {(name !== undefined && accountType !== undefined && name.trim() !== '') && (
-                <Suspense key={`${name}+${Math.random()}`} fallback={<SkeletonStats />}>
+                <Suspense key={`${name}+${accountType}`} fallback={<SkeletonStats />}>
                     <PlayerStats name={name} accountType={accountType} />
                 </Suspense>
             )}
-
         </>
     )
 }

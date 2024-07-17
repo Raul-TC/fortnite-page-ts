@@ -41,12 +41,22 @@ export interface SeasonStats {
 }
 
 export interface All {
-    overall: GameMode;
+    // overall: GameMode;
     solo: GameMode;
     duo: GameMode;
-    trio: number | null;
+    trio?: {
+        placetop1: number,
+        kills: number,
+        placetop3: number,
+        placetop6: number,
+        deaths: number,
+        kd: number,
+        matchesplayed: number,
+        winrate: number,
+        minutesplayed: number
+    };
     squad: GameMode;
-    ltm: number;
+    // ltm: number;
 }
 
 export interface GameMode {
@@ -123,7 +133,7 @@ interface ExtendedLifetime extends All {
 export interface CustomStats {
     accountLevelHistory?: URLStatsID['accountLevelHistory'],
     stats?: {
-        lifetime: CombinedStats,
+        allSeason: CombinedStats,
         season: All
     },
     account?: Account,
@@ -133,10 +143,8 @@ export interface CustomStats {
 }
 
 interface CombinedStats {
-    overall: GameMode;
     solo: GameMode;
     duo: GameMode;
-    squad: GameMode;
     trio: {
         placetop1: number,
         kills: number,
@@ -148,4 +156,5 @@ interface CombinedStats {
         winrate: number,
         minutesplayed: number
     };
+    squad: GameMode;
 }

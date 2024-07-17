@@ -47,8 +47,11 @@ export async function getStats({ name, accountType }: GetStatsParams): Promise<C
         }, { cache: 'no-store' });
 
         const lifetimeStats: CombinedStats = {
-            ...stats.data.stats.all,
+            // ...stats.data.stats.all,
+            solo: stats.data.stats.all.solo,
+            duo: stats.data.stats.all.duo,
             trio: statsOtherAPI.global_stats.trio,
+            squad: stats.data.stats.all.squad,
         };
         const { accountLevelHistory } = statsOtherAPI;
 
@@ -57,8 +60,13 @@ export async function getStats({ name, accountType }: GetStatsParams): Promise<C
             ...stats.data,
             accountLevelHistory,
             stats: {
-                lifetime: lifetimeStats,
-                season: season.data.stats.all,
+                allSeason: lifetimeStats,
+                season: {
+                    solo: season.data.stats.all.solo,
+                    duo: season.data.stats.all.duo,
+                    trio: season.data.stats.all.trio,
+                    squad: season.data.stats.all.squad,
+                },
             },
             status: stats.status
         };
@@ -99,7 +107,6 @@ export async function getBattlePass(): Promise<{ arr: ArrData[], info: Display, 
 
         const raritiesMap = Object.fromEntries(rarities.map(el => [el.name.toUpperCase(), el.image]))
 
-        console.log(res)
         const addBg = res.rewards.map((el: Reward) => {
             const bgDefault = raritiesMap[el.item.rarity?.name.toUpperCase()] || ''
 
@@ -219,7 +226,8 @@ export async function getCosmetics(): Promise<{
                 return ({ name: type.type.name, id: type.type.name })
             }
         })
-        const arrayFiltrado = tipos.filter(el => ['Traje', 'Pico', 'Gesto', 'Ala delta', 'Mochila', 'Mascota', 'Envoltorio', 'Grafiti', 'Música', 'Pista de improvisación', 'Pantalla de carga', 'Lote de Objetos', 'Kit de LEGO®', 'Decoración'].includes(el.name))
+        console.log(tipos)
+        const arrayFiltrado = tipos.filter(el => ['Traje', 'Picos', 'Gesto', 'Ala delta', 'Mochila', 'Mascota', 'Envoltorio', 'Grafiti', 'Música', 'Pista de improvisación', 'Pantalla de carga', 'Lote de Objetos', 'Kit de LEGO®', 'Decoración'].includes(el.name))
 
         const todasRarity: RarityItem = { name: 'Todas', id: 'Todas', image: '' };
 
