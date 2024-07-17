@@ -11,7 +11,9 @@ export const ModeStatsMenu = ({ stats }: { stats?: { allSeason: CombinedStats, s
     const { selectedSeason, selectedMode, handleModeChange, handleSeasonChange } = useSeason({ stats: stats })
 
     const modes = Object.keys(stats?.[selectedSeason] || {}).filter(mode => stats![selectedSeason][mode as ModeType]) as ModeType[];
-
+    if (!stats) {
+        return
+    }
     return (
         <div className="flex w-full flex-row items-start justify-between flex-wrap self-start gap-4">
             <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
