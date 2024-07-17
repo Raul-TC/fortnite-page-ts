@@ -30,11 +30,11 @@ const Player = async ({ searchParams }: PlayerProps) => {
             <div className='flex justify-center items-center flex-wrap m-auto gap-2 text-center'>
                 <Search />
             </div>
-            {(name !== undefined && accountType !== undefined && name.trim() !== '') && (
+            {(name !== undefined && accountType !== undefined && name.trim() !== '') ? (
                 <Suspense key={`${name}+${accountType}`} fallback={<SkeletonStats />}>
                     <PlayerStats name={name} accountType={accountType} />
                 </Suspense>
-            )}
+            ) : <h2>Ingresa tu TagName y selecciona tu plataforma</h2>}
         </>
     )
 }
