@@ -12,8 +12,6 @@ export const ModeStatsMenu = ({ stats }: { stats?: { allSeason: CombinedStats, s
 
     const modes = Object.keys(stats?.[selectedSeason] || {}).filter(mode => stats![selectedSeason][mode as ModeType]) as ModeType[];
 
-    console.log(modes)
-
     return (
         <div className="flex w-full flex-row items-start justify-between flex-wrap self-start gap-4">
             <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
@@ -30,8 +28,8 @@ export const ModeStatsMenu = ({ stats }: { stats?: { allSeason: CombinedStats, s
             </select>
 
             <div className="w-full">
-                {stats?.[selectedSeason]?.[selectedMode] && (
-                    <StatCard stats={stats[selectedSeason][selectedMode]} mode={selectedMode} />
+                {stats![selectedSeason]![selectedMode] && (
+                    <StatCard stats={stats![selectedSeason][selectedMode]} mode={selectedMode} />
                 )}
             </div>
         </div>
