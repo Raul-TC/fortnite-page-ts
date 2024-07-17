@@ -19,7 +19,7 @@ type RarityType = 'Common' | 'Rare' | 'Uncommon' | 'Epic' | 'Legendary';
 
 const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
 
-    const { formatedDate } = useFormatedDate()
+    const { handleLocalDate } = useLocaleDateConvert()
     const { id, name, description, introduction, releaseDate, shopHistory, series, type, set, images, displayAssets, rarity, price, bg, grants, battlepass, added } = await getItem({ idSkin: itemID })
 
     const rarityColorMap = {
@@ -34,8 +34,9 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
     }
 
-    const rarityColor = rarityColorMap[rarity.id as RarityType] || ''
-    const { handleLocalDate } = useLocaleDateConvert()
+    const rarityColor = rarityColorMap[rarity?.id as RarityType] || ''
+
+    let firstApp = releaseDate || added?.date
 
     return (
         <>
@@ -89,7 +90,7 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
                                 </p>
                                 <Image src={vBuck} alt='vBuck_coin' width={50} height={50} className='w-9 h-9' />
                             </div>)}
-                        {(releaseDate || added) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{handleLocalDate({ fecha: new Date(releaseDate || added.date), onlyDate: true }).replaceAll('-', '.')}</span></p>}
+                        {firstApp && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{handleLocalDate({ fecha: firstApp, onlyDate: true }).replaceAll('-', '.')}</span></p>}
                         {(introduction) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Aparición: <span className='text-white'>{introduction?.chapter} {introduction?.season}</span> </p>}
                         {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Skin de pase de Batalla: <span className='text-white'>{battlepass?.displayText.season} - {battlepass?.displayText.chapter} </span> </p>}
                         {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Metodo de Obtención: <span className='text-white'>{battlepass.type === 'paid' ? 'Comprando el Pase' : 'Gratis en el Pase'} </span> </p>}

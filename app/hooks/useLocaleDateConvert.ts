@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 export default function useLocaleDateConvert() {
     const handleLocalDate = useMemo(() => ({ fecha, onlyDate }: { fecha: string | Date, onlyDate?: boolean }) => {
+        if (!fecha) return
         const date = new Date(fecha.toString().includes('T') ? fecha : `${fecha}T00:00:00Z`)
         const options: Intl.DateTimeFormatOptions = {
             weekday: 'long',
