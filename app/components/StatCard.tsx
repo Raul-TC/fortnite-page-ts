@@ -52,7 +52,7 @@ interface TrioStats {
 }
 
 interface StatCardProps {
-    stats: SeasonStats | TrioStats,
+    stats?: SeasonStats | TrioStats,
     mode: string
 }
 
@@ -71,8 +71,8 @@ const StatCard = ({ stats, mode }: StatCardProps) => {
     }, [])
 
     const lastUpdate = lastModified ? handleLocalDate({ fecha: lastModified }) : 'Desconocido';
-    const winCount = 'wins' in stats ? wins : placetop1;
-    const matchCount = 'matches' in stats ? matches : matchesplayed;
+    const winCount = wins ? wins : placetop1;
+    const matchCount = matches ? matches : matchesplayed;
     const winRate = winCount && matchCount ? Math.floor((winCount / matchCount) * 100) : 0;
 
     return (

@@ -5,15 +5,20 @@ import { useSeason } from "../hooks/useSeason";
 
 type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
 
-
-export const ModeStatsMenu = ({ stats }: { stats?: { allSeason: CombinedStats, season: All } }) => {
+interface ModeStatsMenuProps {
+    stats?: { allSeason: CombinedStats, season: All }
+}
+export const ModeStatsMenu = ({ stats }: ModeStatsMenuProps) => {
 
     const { selectedSeason, selectedMode, handleModeChange, handleSeasonChange } = useSeason({ stats: stats })
-
-    const modes = Object.keys(stats?.[selectedSeason] || {}).filter(mode => stats![selectedSeason][mode as ModeType]) as ModeType[];
-    if (!stats) {
-        return
+    if (!stats || !stats[selectedSeason]) {
+        return null; // Otra acción, dependiendo de tu lógica
     }
+    const selectedStats = stats[selectedSeason][selectedMode];
+    if (!selectedStats) {
+        return null; // Otra acción, dependiendo de tu lógica
+    }
+    const modes = Object.keys(stats?.[selectedSeason] || {}).filter(mode => stats![selectedSeason][mode as ModeType]) as ModeType[];
     return (
         <div className="flex w-full flex-row items-start justify-between flex-wrap self-start gap-4">
             <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
@@ -30,8 +35,8 @@ export const ModeStatsMenu = ({ stats }: { stats?: { allSeason: CombinedStats, s
             </select>
 
             <div className="w-full">
-                {stats![selectedSeason]![selectedMode] && (
-                    <StatCard stats={stats![selectedSeason][selectedMode]} mode={selectedMode} />
+                {selectedStats && (
+                    <StatCard stats={selectedStats} mode={selectedMode} />
                 )}
             </div>
         </div>
