@@ -30,9 +30,9 @@ export const ModeStatsMenu = ({ stats }: { stats?: { allSeason: CombinedStats, s
             </select>
 
             <div className="w-full">
-                {/* {stats?.[selectedSeason]?.[selectedMode] && ( */}
-                <StatCard stats={stats[selectedSeason][selectedMode]} mode={selectedMode} />
-                {/* )} */}
+                {stats?.[selectedSeason]?.[selectedMode] && (
+                    <StatCard stats={stats[selectedSeason][selectedMode]} mode={selectedMode} />
+                )}
             </div>
         </div>
     )
