@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import { luckiestGuy } from "../assets/fonts";
 import BackgroundCard from "./BackgroundCard";
@@ -62,7 +62,7 @@ export const SectionShop = ({ el }: SectionShopProps) => {
             </div>
             {el.data.length > initialVisibleItems && visibleItems < el.data.length && (
                 <div className='text-center mt-4'>
-                    <button onClick={showMoreItems} className={`bg-yellowForrnite text-bg-header py-2 px-4 rounded font-bold hover:opacity-60  active:scale-95 transition-opacity ease-in-out duration-200`}>
+                    <button onClick={showMoreItems} className={`bg-yellowFortnite text-bg-header py-2 px-4 rounded font-bold hover:opacity-60  active:scale-95 transition-opacity ease-in-out duration-200`}>
                         Ver más
                     </button>
                 </div>

@@ -23,7 +23,7 @@ export const AllSkins = ({ allItems, rarities }: AllSkinsProps) => {
         <>  <div className='flex gap-4 flex-wrap  justify-between items-center'>
 
             <input
-                name='searchSkin' placeholder='Jinx Arcane' className='bg-yellowForrnite text-bg-body py-2 px-4 rounded-md outline-none w-[50%]' onChange={(e) => {
+                name='searchSkin' placeholder='Jinx Arcane' className='bg-yellowFortnite text-bg-body py-2 px-4 rounded-md outline-none w-[50%]' onChange={(e) => {
                     handleFilters({ data: { search: e.target.value } })
                 }}
             />

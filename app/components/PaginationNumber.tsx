@@ -8,12 +8,12 @@ interface PaginationNumberProps {
 }
 
 export const PaginationNumber = ({ page, href, isActive, position }: PaginationNumberProps) => {
-    const className = `flex h-10 w-10 items-center justify-center text-sm border 
+    const className = `flex h-10 w-10 items-center justify-center text-sm  
     ${position === 'first' || position === 'single' ? 'rounded-l-md' : ''} 
     ${position === 'last' || position === 'single' ? 'rounded-r-md' : ''} 
-    ${isActive ? 'z-10 bg-yellowForrnite border-yellow-600 text-black' : ''} 
-    ${!isActive && position !== 'middle' ? 'hover:bg-yellow-700' : ''} 
-    ${position === 'middle' ? 'text-yellow-700' : ''}`;
+    ${isActive ? 'z-10 bg-yellowFortnite border-yellowFortnite text-black' : ''} 
+    ${!isActive && position !== 'middle' ? 'hover:bg-yellowFortnite hover:text-black' : ''} 
+    ${position === 'middle' ? 'text-yellowFortnite' : ''}`;
 
     return isActive || position === 'middle' ? (
         <div className={className}>{page}</div>

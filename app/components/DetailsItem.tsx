@@ -44,8 +44,10 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
                 <div className='w-28 h-28 rounded-full m-auto overflow-hidden'>
                     <img src={images?.icon || displayAssets[0]?.url} alt='' className='border-spacing-2 border-gray-400' />
                 </div>
-                <span className={`${luckiestGuy.className}`}>   {name}</span>
-                <span className='text-lg'>{description}</span>
+                <div className='my-2 flex flex-col'>
+                    <span className={`${luckiestGuy.className}`}>{name}</span>
+                    <span className='text-lg'>{description}</span>
+                </div>
             </div>
 
             <div className='flex flex-col items-center m-auto mt-4 w-[90%] max-w-[1440px] min-h-[calc(100vh-96px)] mb-16 relative'>
@@ -89,7 +91,7 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
                             </div>)}
                         {(releaseDate || added) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Primera Aparición: <span className='text-white'>{handleLocalDate({ fecha: new Date(releaseDate || added.date), onlyDate: true }).replaceAll('-', '.')}</span></p>}
                         {(introduction) && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Aparición: <span className='text-white'>{introduction?.chapter} {introduction?.season}</span> </p>}
-                        {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Skin de pase de Batalla: <span className='text-white'>{battlepass?.displayText.chapter} {battlepass?.displayText.season}</span> </p>}
+                        {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Skin de pase de Batalla: <span className='text-white'>{battlepass?.displayText.season} - {battlepass?.displayText.chapter} </span> </p>}
                         {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Metodo de Obtención: <span className='text-white'>{battlepass.type === 'paid' ? 'Comprando el Pase' : 'Gratis en el Pase'} </span> </p>}
                         {battlepass && <p className=' font-bold md:text-2xl text-left self-start text-gray-500'>Página: <span className='text-white'>{battlepass.page}</span> </p>}
                         {series && <p className=' font-bold text-center md:text-2xl text-gray-500 self-start'>Serie:<span className='self-start font-normal capitalize'> <span className='text-white'>{(series.name).substring(6)}</span></span></p>}

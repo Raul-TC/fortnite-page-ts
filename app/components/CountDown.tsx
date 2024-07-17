@@ -23,7 +23,7 @@ const CountDown = React.memo(({ date, isShop }: CountDowProps) => {
     ))
 
     return (
-        <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap ' : ''} flex flex-col items-center justify-between text-yellowForrnite w-full ${!isShop ? 'my-4' : ''}`}>
+        <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap ' : ''} flex flex-col items-center justify-between text-yellowFortnite w-full ${!isShop ? 'my-4' : ''}`}>
 
             <span className={`${isShop ? 'text-4xl' : ''} block text-left text-base○`}> {isShop ? 'Siguiente Tienda' : 'Quedan:'}</span>
             {hours === 0 && minutes === 0 && seconds === 0
