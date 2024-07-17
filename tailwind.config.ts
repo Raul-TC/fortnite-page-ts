@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'bg-header': '#18181c',
+        'bg-header': '#18181C',
         'bg-body': '#101014',
-        'yellowForrnite': '#F7FF19'
+        'yellowFortnite': '#F7FF19'
       }
 
     },
