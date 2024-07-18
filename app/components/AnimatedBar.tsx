@@ -10,6 +10,6 @@ export const AnimatedBar = ({ color, data, height, index }: { color: string, dat
         '--progress-width': `${data}%`,
     };
     return (
-        <div className={`bg-${color}-500 h-${height} rounded-full absolute z-${index} progress-bar-animated progress-bar`} style={barStyle}></div>
+        <div className={`${color} h-${height} rounded-full absolute z-${index} progress-bar-animated progress-bar`} style={barStyle}></div>
     )
 }

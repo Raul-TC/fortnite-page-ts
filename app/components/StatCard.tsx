@@ -184,13 +184,13 @@ const StatCard = ({ stats, mode, battlePass }: StatCardProps) => {
 
             <div className='w-full'>
                 <div className='w-full relative bg-gray-300 rounded-full h-8 overflow-hidden progress-bar-container'>
-                    <AnimatedBar key={winRatePercent + 'winRate'} color='green' height='6' index='30' data={winRatePercent} />
+                    <AnimatedBar key={winRatePercent + 'winRate'} color='bg-green-500' height='6' index='30' data={winRatePercent} />
                     {/* <div className='bg-green-500 h-6 rounded-full absolute z-30 progress-bar-animated progress-bar' data-progress={`${winRatePercent}%`}></div> */}
                     {/* {mode !== 'trio' && <AnimatedBar color='red' height='4' index='0' data={deathsPercent} />} */}
-                    {mode === 'solo' && <AnimatedBar key={topSolo + 'solo'} color='blue' height='8' index='20' data={topSolo} />}
-                    {mode === 'duo' && <AnimatedBar key={topDuo + 'duo'} color='orange' height='8' index='10' data={topDuo} />}
-                    {mode === 'trio' && <AnimatedBar key={topTrio + 'trio'} color='purple' height='8' index='10' data={topTrio} />}
-                    {mode === 'squad' && <AnimatedBar key={topSquad + 'squad'} color='yellow' height='8' index='10' data={topSquad} />}
+                    {mode === 'solo' && <AnimatedBar key={topSolo + 'solo'} color='bg-blue-500' height='8' index='20' data={topSolo} />}
+                    {mode === 'duo' && <AnimatedBar key={topDuo + 'duo'} color='bg-orange-500' height='8' index='10' data={topDuo} />}
+                    {mode === 'trio' && <AnimatedBar key={topTrio + 'trio'} color='bg-purple-500' height='8' index='10' data={topTrio} />}
+                    {mode === 'squad' && <AnimatedBar key={topSquad + 'squad'} color='bg-yellow-500' height='8' index='10' data={topSquad} />}
                     {/* {mode === 'duo' && <AnimatedBar color='blue' height='8' index='10' data={topDuo} />} */}
                     {/* {mode === 'duo' && <div className='bg-blue-500 h-8 rounded-full absolute z-20 progress-bar-animated progress-bar' data-progress={`${topDuo}%`}></div>} */}
                     {/* <div className='bg-gray-700 h-10 rounded-full absolute z-10' style={{ '--progress-width': `${matchCount}%` }}></div> */}
