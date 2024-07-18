@@ -4,13 +4,15 @@ import StatCard from "./StatCard";
 import { useSeason } from "../hooks/useSeason";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { balsamiqSans } from '../assets/fonts'
+import { BattlePass } from '../api/stats';
 type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
 
 interface ModeStatsMenuProps {
-    stats?: { allSeason: CombinedStats, season: All }
+    stats?: { allSeason: CombinedStats, season: All },
+    battlePass?: BattlePass
 }
-export const ModeStatsMenu = ({ stats }: ModeStatsMenuProps) => {
+export const ModeStatsMenu = ({ stats, battlePass }: ModeStatsMenuProps) => {
     const [mainPage, setMainPage] = useState(false)
     const { selectedSeason, selectedMode, handleModeChange, handleSeasonChange } = useSeason({ stats: stats })
     if (!stats || !stats[selectedSeason]) {
@@ -40,12 +42,11 @@ export const ModeStatsMenu = ({ stats }: ModeStatsMenuProps) => {
         <>
             {
                 selectedStats && !mainPage && (
-                    <div className="flex w-full flex-row items-start justify-between flex-wrap self-start gap-4">
-                        <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
-                        >
-                            <option value="season" className="outline-none border-none">Season</option>
-                            <option value="allSeason" className="outline-none border-none">All Season</option>
-                        </select>
+                    <div className={`flex w-full flex-row items-start justify-between flex-wrap self-start gap-4 ${balsamiqSans.className}`}>                        <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
+                    >
+                        <option value="season" className={`${balsamiqSans.className} outline-none border-none`}>Esta Temporada</option>
+                        <option value="allSeason" className="outline-none border-none">Todas Temporadas</option>
+                    </select>
 
                         <select value={selectedMode} onChange={handleModeChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
                         >
@@ -56,7 +57,7 @@ export const ModeStatsMenu = ({ stats }: ModeStatsMenuProps) => {
 
                         <div className="w-full">
                             {/* {selectedStats && mainPage && ( */}
-                            <StatCard stats={selectedStats} mode={selectedMode} />
+                            <StatCard stats={selectedStats} mode={selectedMode} battlePass={battlePass} />
                             {/* )} */}
                         </div>
                     </div>)

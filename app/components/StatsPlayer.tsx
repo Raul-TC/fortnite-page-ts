@@ -27,11 +27,14 @@ const PlayerStats = async ({ name, accountType }: PlayerStatsProps) => {
             <div className='mt-4'>
                 <div className='mt-2 mb-4'>
                     <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{account?.name} </h2>
-                    <h2 className={`${luckiestGuy.className} text-center text-2xl`}>Temporada Actual: Nivel {battlePass?.level}</h2>
+                    {/* <div className='flex items-center justify-center gap-2'>
+                        <img src={star.src} alt="" />
+                        <h2 className={`${luckiestGuy.className} text-center text-2xl`}> {battlePass?.level} Pase de Batalla</h2>
+                    </div> */}
                 </div>
                 <div className='flex w-full flex-col md:flex-row items-start justify-start flex-wrap self-start gap-4'>
                     <Suspense fallback={<SkeletonStats />}>
-                        <ModeStatsMenu stats={stats} />
+                        <ModeStatsMenu stats={stats} battlePass={battlePass} />
                     </Suspense>
                 </div>
             </div>
