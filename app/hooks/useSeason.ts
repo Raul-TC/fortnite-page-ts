@@ -1,5 +1,7 @@
-import { ChangeEvent, useState } from "react";
+'use client'
+import { ChangeEvent, useEffect, useState } from "react";
 import { All, CombinedStats } from "../api/stats";
+import { useSearchParams } from "next/navigation";
 
 type SeasonType = 'season' | 'allSeason';
 type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
@@ -7,6 +9,7 @@ type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
 export function useSeason({ stats }: { stats?: { allSeason: CombinedStats, season: All } }) {
     const [selectedSeason, setSelectedSeason] = useState<SeasonType>('season');
     const [selectedMode, setSelectedMode] = useState<ModeType>('solo');
+    const [mainPage, setMainPage] = useState(false)
 
 
 
@@ -22,5 +25,20 @@ export function useSeason({ stats }: { stats?: { allSeason: CombinedStats, seaso
     const handleModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setSelectedMode(e.target.value as ModeType);
     };
-    return { selectedSeason, selectedMode, handleModeChange, handleSeasonChange }
+
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const pathname = window.location.pathname;
+        console.log(pathname)
+        const name = searchParams.get('name');
+        const accountType = searchParams.get('accountType');
+
+        if (name && accountType) {
+            setMainPage(false);
+        } else {
+            setMainPage(true);
+        }
+    }, [searchParams]);
+    return { mainPage, selectedSeason, selectedMode, handleModeChange, handleSeasonChange }
 }

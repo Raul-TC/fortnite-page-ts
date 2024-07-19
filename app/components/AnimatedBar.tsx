@@ -4,12 +4,15 @@ interface CustomStyle extends React.CSSProperties {
     '--progress-width'?: string;
 }
 
-export const AnimatedBar = ({ color, data, height, index }: { color: string, data: number, height: string, index: string }) => {
+export const AnimatedBar = ({ color, data, height, zIndex }: { color: string, data: number, height: number, zIndex: number }) => {
     // @ts-ignore
     const barStyle: CustomStyle = {
         '--progress-width': `${data}%`,
+        height: height,
+        top: `0`,
+        zIndex: zIndex
     };
     return (
-        <div className={`${color} h-${height} rounded-full absolute z-${index} progress-bar-animated progress-bar`} style={barStyle}></div>
+        <div className={`${color}  rounded-full absolute progress-bar-animated progress-bar`} style={barStyle}></div>
     )
 }
