@@ -1,7 +1,7 @@
 'use client'
 import { ChangeEvent, useEffect, useState } from "react";
 import { All, CombinedStats } from "../api/stats";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type SeasonType = 'season' | 'allSeason';
 type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
@@ -27,6 +27,7 @@ export function useSeason({ stats }: { stats?: { allSeason: CombinedStats, seaso
     };
 
     const searchParams = useSearchParams();
+    const router = useRouter()
 
     useEffect(() => {
         const pathname = window.location.pathname;
@@ -38,6 +39,8 @@ export function useSeason({ stats }: { stats?: { allSeason: CombinedStats, seaso
             setMainPage(false);
         } else {
             setMainPage(true);
+            router.refresh()
+
         }
     }, [searchParams]);
     return { mainPage, selectedSeason, selectedMode, handleModeChange, handleSeasonChange }

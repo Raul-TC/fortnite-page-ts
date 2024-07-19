@@ -25,11 +25,14 @@ const Search = () => {
                     <img className={`${stats.type === logo.name ? 'shadow-lg bg-yellow-600' : ''} rounded-full cursor-pointer hover:bg-yellowFortnite hover:shadow-lg transition-all ease-in-out duration-200 flex`} src={logo.src} key={logo.name} alt={`${logo.name}_icon`} onClick={() => setStats({ ...stats, type: logo.name })} />
                 ))}
             </div>
-            {(stats.isEmpty && stats.user.trim() === '' && stats.type.trim() === '') && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
-            {(stats.user.trim() === '' && stats.isEmpty) && <div className='text-red-400'>Debes escribir tu usuario</div>}
-            {(stats.type.trim() === '' && stats.isEmpty) && <div className='text-red-400'>Debes seleccionar tu plataforma</div>}
-            {(stats.user.trim().length === 0 && stats.isEmpty) && <div className='text-red-400'>Has ingresado espacios en blanco</div>}
-        </form>
+            {stats.isEmpty && (
+                <div className='text-red-400 mt-2'>
+                    {stats.user.trim() === '' && <div>Debes escribir tu usuario</div>}
+                    {stats.type.trim() === '' && <div>Debes seleccionar tu plataforma</div>}
+                    {stats.user.trim().length === 0 && <div>Has ingresado espacios en blanco</div>}
+                    {stats.user.trim() === '' && stats.type.trim() === '' && <div>No Seleccionado nada Noob 😒, has de ser Bronce</div>}
+                </div>
+            )}</form>
     )
 }
 

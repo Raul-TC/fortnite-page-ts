@@ -3,17 +3,24 @@ import { luckiestGuy } from '../assets/fonts'
 import { getStats } from '../services/fetchData'
 import { ModeStatsMenu } from './ModeStatsMenu'
 import SkeletonStats from './SkeletonStats'
-import star from '../assets/star.svg'
+import { Account, All, BattlePass, CombinedStats } from '../api/stats'
 
 interface PlayerStatsProps {
     name: string,
-    accountType: string
+    accountType: string,
+    stats?: {
+        allSeason: CombinedStats,
+        season: All
+    },
+    battlePass?: BattlePass,
+    account?: Account,
+    stack?: boolean,
+    isSearchValid: boolean
 }
 export const dynamic = 'force-dynamic'
 
-const PlayerStats = async ({ name, accountType }: PlayerStatsProps) => {
+const PlayerStats = async ({ name, accountType, isSearchValid }: PlayerStatsProps) => {
     const { stats, account, battlePass, stack, } = await getStats({ name, accountType })
-
 
     if (stack) {
         return <div className='text-2xl text-center my-4'>
@@ -22,23 +29,17 @@ const PlayerStats = async ({ name, accountType }: PlayerStatsProps) => {
         </div>
     }
 
-
+    console.log(name)
+    console.log(accountType)
     return (
         <>
-            <div className='mt-4'>
-                <div className='mt-2 mb-4'>
-                    <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{account?.name} </h2>
-                    <div className='flex items-center justify-center gap-2'>
-                        <img src={star.src} alt="" />
-                        <h2 className={`${luckiestGuy.className} text-center text-2xl`}> {battlePass?.level} Nivel Pase de Batalla</h2>
-                    </div>
-                </div>
-                <div className='flex w-full flex-col md:flex-row items-start justify-start flex-wrap self-start gap-4'>
+            {isSearchValid &&
+                <div className='flex w-full mt-4 flex-col md:flex-row items-start justify-start flex-wrap self-start gap-4'>
                     <Suspense fallback={<SkeletonStats />}>
-                        <ModeStatsMenu stats={stats} battlePass={battlePass} />
+                        <ModeStatsMenu stats={stats} battlePass={battlePass} account={account} />
                     </Suspense>
                 </div>
-            </div>
+            }
         </>
     )
 }

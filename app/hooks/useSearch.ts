@@ -13,7 +13,7 @@ const useSearch = () => {
     const { replace } = useRouter()
     const [stats, setStats] = useState<Stats>({ user: '', type: '', isEmpty: false })
     const searchParams = useSearchParams()
-
+    const router = useRouter()
     const pathname = usePathname()
 
     const user = searchParams.get('name') || ''
@@ -28,7 +28,8 @@ const useSearch = () => {
     const handleSubmit = ({ e }: { e: FormEvent<HTMLFormElement> }) => {
         e.preventDefault()
 
-        const params = new URLSearchParams()
+        const params = new URLSearchParams(searchParams.toString())
+        console.log(params)
 
         if (stats.user.trim() === '' || stats.type.trim() === '') {
             setStats({ ...stats, isEmpty: true })
@@ -36,7 +37,8 @@ const useSearch = () => {
             params.set('name', stats.user)
             params.set('accountType', stats.type)
             setStats({ ...stats, isEmpty: false })
-            replace(`${pathname}?${params.toString()}`)
+            // replace(`${pathname}?${params.toString()}`)
+            router.push(`${pathname}?${params.toString()}`,)
         }
 
     }

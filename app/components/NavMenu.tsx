@@ -35,8 +35,7 @@ const NavMenu = () => {
 
             <ul className='md:flex gap-6 font-semibold items-center hidden'>
                 {links.map((item, index) => (
-                    <Link key={`${index}_${item.name}`} href={item.path} className='px-2 hover:text-yellowFortnite transition-colors ease-out duration-200' >
-
+                    <Link key={`${index}_${item.name}_${crypto.randomUUID()}`} href={item.path} className='px-2 hover:text-yellowFortnite transition-colors ease-out duration-200' >
                         <li>{item.name}</li>
                     </Link>
                 ))}
