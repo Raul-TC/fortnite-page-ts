@@ -54,7 +54,11 @@ interface TrioStats {
     winrate: number,
     minutesplayed: number
 }
-
+interface Bar {
+    key: string;
+    color: string;
+    data: number;
+}
 interface StatCardProps {
     stats?: SeasonStats | TrioStats | CombinedStats,
     mode?: string,
@@ -109,7 +113,7 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
     //     });
     // }, [winRatePercent, topSolo, topDuo]);
 
-    let bars = [];
+    let bars: Bar[] = [];
     switch (mode) {
         case 'solo':
             bars = [
