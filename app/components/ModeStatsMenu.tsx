@@ -16,9 +16,7 @@ interface ModeStatsMenuProps {
     account?: Account
 }
 export const ModeStatsMenu = ({ stats, battlePass, account }: ModeStatsMenuProps) => {
-    // const [mainPage, setMainPage] = useState(false)
-    // const [selectedSeason, setSelectedSeason] = useState<SeasonType>('season');
-    // const [selectedMode, setSelectedMode] = useState<ModeType>('solo');
+
     const { mainPage, selectedSeason, selectedMode, handleModeChange, handleSeasonChange } = useSeason({ stats: stats })
     if (!stats || !stats[selectedSeason]) {
         return null; // Otra acción, dependiendo de tu lógica
@@ -29,33 +27,6 @@ export const ModeStatsMenu = ({ stats, battlePass, account }: ModeStatsMenuProps
     }
     const modes = Object.keys(stats?.[selectedSeason] || {}).filter(mode => stats![selectedSeason][mode as ModeType]) as ModeType[];
 
-    const searchParams = useSearchParams();
-
-    // const handleSeasonChange = (e: ChangeEvent<HTMLSelectElement>) => {
-
-    //     const newSeason = e.target.value as SeasonType;
-    //     setSelectedSeason(newSeason);
-
-    //     const firstMode = Object.keys(stats![newSeason])[0] as ModeType;
-    //     setSelectedMode(firstMode);
-    // };
-
-    // const handleModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //     setSelectedMode(e.target.value as ModeType);
-    // };
-    // const router = useRouter()
-    // useEffect(() => {
-    //     const name = searchParams.get('name');
-    //     const accountType = searchParams.get('accountType');
-
-    //     if (name && accountType) {
-    //         setMainPage(false);
-    //     } else {
-    //         setMainPage(true);
-    //         router.refresh()
-    //     }
-
-    // }, [searchParams]);
     return (
         <>
             {

@@ -30,8 +30,6 @@ export function useSeason({ stats }: { stats?: { allSeason: CombinedStats, seaso
     const router = useRouter()
 
     useEffect(() => {
-        const pathname = window.location.pathname;
-        console.log(pathname)
         const name = searchParams.get('name');
         const accountType = searchParams.get('accountType');
 

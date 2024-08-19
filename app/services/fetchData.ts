@@ -152,17 +152,6 @@ export async function getShop(): Promise<{ shop: ShopArray[], lastUpdated: LastU
             bgDefault: el.rarity?.name.toUpperCase() ? raritiesMap[el.rarity.name.toUpperCase()] : ''
         }));
 
-        // addBg.forEach(item => {
-        //     if (!dataFiltered[item.section.name]) {
-        //         dataFiltered.Destacados.push({ ...item })
-        //     } else {
-        //         const datt = dataFiltered[item.section.name].map(ab => {
-        //             return ab.displayName === item.displayName
-        //         })
-
-        //         !datt.includes(true) && dataFiltered[item.section.name].push({ ...item })
-        //     }
-        // })
         addBg.forEach(item => {
             const sectionName = item.section.name || 'Destacados';
             if (!dataFiltered[sectionName].some(ab => ab.displayName === item.displayName)) {
@@ -226,7 +215,6 @@ export async function getCosmetics(): Promise<{
                 return ({ name: type.type.name, id: type.type.name })
             }
         })
-        console.log(tipos)
         const arrayFiltrado = tipos.filter(el => ['Traje', 'Picos', 'Gesto', 'Ala delta', 'Mochila', 'Mascota', 'Envoltorio', 'Grafiti', 'Música', 'Pista de improvisación', 'Pantalla de carga', 'Lote de Objetos', 'Kit de LEGO®', 'Decoración'].includes(el.name))
 
         const todasRarity: RarityItem = { name: 'Todas', id: 'Todas', image: '' };
@@ -259,7 +247,6 @@ export async function getItem({ idSkin }: { idSkin: string }): Promise<Item> {
         const { series } = await getRarities()
 
         const seriesMap = Object.fromEntries(series.map(el => [el.name.toUpperCase(), el.image]))
-        console.log(item)
         const addBg = () => {
             const bgImage = seriesMap[item?.series?.name.toUpperCase() || ''] || ''
             let precio = item.price

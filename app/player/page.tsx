@@ -4,7 +4,6 @@ import React, { Suspense } from 'react'
 import Search from '../components/Search'
 import PlayerStats from '../components/StatsPlayer'
 import SkeletonStats from '../components/SkeletonStats'
-import { getStats } from '../services/fetchData'
 
 export const metadata = {
     title: 'Estadísticas del Jugador',
@@ -26,16 +25,11 @@ interface PlayerProps {
 
 const Player = async ({ searchParams }: PlayerProps) => {
     const { name, accountType } = searchParams
-    // const { stats, account, battlePass, stack } = await getStats({ name, accountType })
+
 
 
     const isSearchValid = name && accountType && name.trim() !== '';
-    // if (stack) {
-    //     return <div className='text-2xl text-center my-4'>
-    //         <h2>Usuario: <span className='font-bold text-yellowFortnite'>{name}</span> no encontrado. 🥲🥲</h2>
-    //         <span>Verifica el nombre y/o la plataforma seleccionda</span>
-    //     </div>
-    // }
+
 
     return (
         <>
