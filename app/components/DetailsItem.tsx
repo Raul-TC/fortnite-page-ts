@@ -107,7 +107,7 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
                         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-between '>
                             {grants?.map((el, index) => {
                                 return (
-                                    <Link href={`/cosmetics/${el.id}`} key={index} className='relative w-full rounded-md overflow-hidden'>
+                                    <Link href={`/cosmetics/${el.id}`} key={index} className='relative w-full rounded-md overflow-hidden hover:scale-110 active:scale-90 hover:z-40 transition-transform ease-in-out duration-200'>
                                         {el.images.icon_background
                                             ? (
                                                 <>
