@@ -2,19 +2,23 @@
 import Link from 'next/link'
 import { useToggle } from '../hooks/useToggle'
 import HamburguerMenu from './HamburguerMenu'
+import playerIcon from '../assets/streamline_controller-solid.svg'
+import cosmeticsIcon from '../assets/ant-design_skin-filled.svg'
+import shopIcon from '../assets/shopSVG.svg'
+import homeIcon from '../assets/ion_home-sharp.svg'
 
 const links = [
     {
-        name: 'Inicio', path: '/'
+        name: 'Inicio', path: '/', icon: homeIcon.src
     },
     {
-        name: 'Tienda', path: '/shop/'
+        name: 'Tienda', path: '/shop/', icon: shopIcon.src
     },
     {
-        name: 'Cosmeticos', path: '/cosmetics'
+        name: 'Cosmeticos', path: '/cosmetics', icon: cosmeticsIcon.src,
     },
     {
-        name: 'Jugador', path: '/player'
+        name: 'Jugador', path: '/player', icon: playerIcon.src
     }
 ]
 const NavMenu = () => {
@@ -27,7 +31,10 @@ const NavMenu = () => {
                 <ul className='fixed w-full bg-bg-header p-4 left-0 right-0 bottom-0 top-0 z-[80] flex flex-col items-center justify-between py-16'>
                     {links.map((item, index) => (
                         <Link key={`${index}_${item.name}`} href={item.path} className='px-2'>
-                            <li onClick={handleToggle}>{item.name}</li>
+                            <div onClick={handleToggle} className='flex items-center justify-between gap-4'>
+                                <img src={item.icon} alt={`${item.name}_${index}`} className='w-7 h-7' />
+                                <li >{item.name}</li>
+                            </div>
                         </Link>
                     )
                     )}
