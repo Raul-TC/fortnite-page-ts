@@ -4,6 +4,7 @@ import CurrentDay from './CurrentDay'
 import CountDown from './CountDown'
 import { Rewards } from './Rewards'
 import { useRewards } from '../hooks/useRewards'
+import useLocaleDateConvert from '../hooks/useLocaleDateConvert'
 
 interface Props {
     currentPage: number
@@ -26,7 +27,7 @@ const BattlePass = React.memo(({ currentPage, arr, info, seasonDates, videos }: 
 
             </div>
             <div className='flex flex-col self-start items-center justify-center w-full rounded-md top-0 left-0 right-0'>
-                <CountDown isShop={false} date={seasonDates.end} />
+                <CountDown isShop={false} date={seasonDates.end} message='Actualizando Información de la Nueva Temporada' />
             </div>
             <div className=' flex items-center justify-between w-full'>
                 <video

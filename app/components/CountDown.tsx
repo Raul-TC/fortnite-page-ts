@@ -7,8 +7,9 @@ import { useCountDown } from "../hooks/useCountDown"
 interface CountDowProps {
     date?: string | Date,
     isShop: boolean,
+    message?: string
 }
-const CountDown = React.memo(({ date, isShop }: CountDowProps) => {
+const CountDown = React.memo(({ date, isShop, message }: CountDowProps) => {
     const { days, hours, minutes, seconds } = useCountDown({ date, isShop })
 
     const formatTime = ({ time }: { time: number | string }) => time.toString().padStart(2, '0');
@@ -21,7 +22,7 @@ const CountDown = React.memo(({ date, isShop }: CountDowProps) => {
             <span>{label}</span>
         </div>
     ))
-
+    if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) return <h1 className="text-xl text-yellowFortnite font-bold my-4">{message}</h1>
     return (
         <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap ' : ''} flex flex-col items-center justify-between text-yellowFortnite w-full ${!isShop ? 'my-4' : ''}`}>
 
@@ -29,7 +30,7 @@ const CountDown = React.memo(({ date, isShop }: CountDowProps) => {
             {hours === 0 && minutes === 0 && seconds === 0
                 ? (
                     <>
-                        <h2 className='m-auto text-xl text-center px-2'>Crgando Contador⌛</h2>
+                        <h2 className='m-auto text-xl text-center px-2'>Cargando Contador⌛</h2>
                     </>
                 )
                 : (
