@@ -66,7 +66,7 @@ interface StatCardProps {
     isAll?: boolean
 }
 
-const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
+const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
     const { solo, duo, trio, squad, wins, kills, placetop1, placetop3, top3, top5, top6, placetop6, top10, top12, top25, deaths, kd, matches, matchesplayed, minutesplayed, lastModified, minutesPlayed } = stats as SeasonStats & TrioStats & CombinedStats
 
     const allTimePlayed = solo?.minutesPlayed + duo?.minutesPlayed + trio?.minutesplayed + squad?.minutesPlayed
@@ -90,9 +90,6 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
     const winRate = Math.floor((winCount ?? allWins) / (matchCount ?? allGames) * 100) ?? 0;
 
     const winRatePercent = ((winCount ?? allWins) / (matchCount ?? allGames)) * 100;
-    const kdRatPercent = (kd / matchCount);
-    const allKdRatPercent = (allKD / allGames);
-    const killRatePercent = (kills / matchCount);
     const topSolo = ((top10 + top25) / matchCount) * 100
     const allTopSolo = ((solo?.top10 + solo?.top25) / allGames) * 100
     const allTopDuo = ((duo?.top5 + duo?.top12) / allGames) * 100
@@ -101,18 +98,7 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
     const topDuo = ((top5 + top12) / matchCount) * 100
     const topTrio = ((placetop3 + placetop6) / matchCount) * 100
     const topSquad = ((top3 + top6) / matchCount) * 100
-    // const deathsPercent = (deaths / matchCount) * 100
-    // const topRatePercent = (tops / totalMatches) * 100;
-    // useEffect(() => {
-    //     const bars = document.querySelectorAll('.progress-bar') as NodeListOf<HTMLElement>;
-    //     console.log(bars)
-    //     bars.forEach((bar) => {
-    //         const width = bar.getAttribute('data-progress');
-    //         if (width) {
-    //             bar.style.setProperty('--progress-width', `${width}`);
-    //         }
-    //     });
-    // }, [winRatePercent, topSolo, topDuo]);
+
 
     let bars: Bar[] = [];
     switch (mode) {
@@ -162,8 +148,9 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
     bars.sort((a, b) => b.data - a.data);
     const totalBars = bars.length; // Cambia este número si agregas o quitas barras
     const containerHeight = 50; // Altura total del contenedor en px
-    const barHeight = containerHeight / totalBars; // Altura dinámica de cada barra
     const factor = 1.5; // Factor para que cada barra mida un poco más de la mitad de la barra anterior
+
+
     return (
         <div className={`${balsamiqSans.className} font-bold relative m-auto bg-bg-header text-base rounded-md w-[98%]`}>
             <div className='flex items-center px-4 border-b border-gray-500 w-full py-4'>
@@ -174,11 +161,7 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
                         <p><span className='text-white'>{handleMinutes({ time: (minutesPlayed ?? minutesplayed) || allTimePlayed })} Jugado</span></p>
                     </div>
                 </div>
-                {/* <div className={commonClass}>
-                    <img src={star.src} alt="" />
-                    <p><span className='text-white'>{battlePass?.level} Nivel Pase de Batalla</span></p>
-                </div> */}
-                {/* %Win Wins KD Kills */}
+
             </div>
             <div className='flex justify-between items-center gap-4 flex-wrap w-full px-4 my-4'>
 
@@ -189,9 +172,6 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
                         <h3 className='text-4xl'>{winRate}</h3>
                     </div>
                 </div>
-                {/* <div className='w-full bg-gray-300 rounded-full h-4 overflow-hidden'>
-                    <div className='bg-yellow-500 h-full rounded-full' style={{ width: `${winRate}%` }}></div>
-                </div> */}
                 <div className='bg-gray-800 flex flex-row items-center gap-2 py-2 px-4 rounded-md' >
                     <img src={winsImg.src} alt="" className='w-7 h-7' />
                     <div>
@@ -204,7 +184,7 @@ const StatCard = ({ stats, mode, battlePass, isAll }: StatCardProps) => {
 
                     <div>
                         <p>K / D</p>
-                        <h3 className='text-4xl'>{kd ?? allKD}</h3>
+                        <h3 className='text-4xl'>{parseFloat(kd?.toFixed(2)) || parseFloat(allKD?.toFixed(2))}</h3>
 
                     </div>
                 </div>
