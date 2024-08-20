@@ -317,7 +317,7 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
                     }
                     <div className={commonClass}>
                         <img src={kdaImg.src} alt="" />
-                        <p>K / D: <span className='text-white'>{kd}</span></p>
+                        <p>K / D: <span className='text-white'>{parseFloat(kd?.toFixed(2))}</span></p>
                     </div>
                     <div className={commonClass}>
                         <img src={games.src} alt="" />
