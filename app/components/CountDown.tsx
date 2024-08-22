@@ -22,7 +22,7 @@ const CountDown = React.memo(({ date, isShop, message }: CountDowProps) => {
             <span>{label}</span>
         </div>
     ))
-    if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) return <h1 className="text-xl text-yellowFortnite font-bold my-4">{message}</h1>
+    if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) return <h1 className="text-xl text-yellowFortnite font-bold my-4 text-center">{message}</h1>
     return (
         <div className={`${luckiestGuy.className} ${!isShop ? 'flex-wrap ' : ''} flex flex-col items-center justify-between text-yellowFortnite w-full ${!isShop ? 'my-4' : ''}`}>
 
