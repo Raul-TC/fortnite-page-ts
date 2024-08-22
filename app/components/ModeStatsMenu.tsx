@@ -4,10 +4,7 @@ import StatCard from "./StatCard";
 import { useSeason } from "../hooks/useSeason";
 import { balsamiqSans, luckiestGuy } from '../assets/fonts'
 import { BattlePass } from '../api/stats';
-import { ChangeEvent, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
-type SeasonType = 'season' | 'allSeason';
 import star from '../assets/star.svg'
 
 interface ModeStatsMenuProps {
@@ -41,12 +38,12 @@ export const ModeStatsMenu = ({ stats, battlePass, account }: ModeStatsMenuProps
                         </div>
                         <StatCard key='allSeasons' stats={stats.allSeason} battlePass={battlePass} isAll={true} />
                         <div className={`flex w-full flex-row items-start justify-between flex-wrap self-start gap-4 my-4 ${balsamiqSans.className}`}>
-                            <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none">
+                            <select value={selectedSeason} onChange={handleSeasonChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none ml-4">
                                 <option value="season" className={`${balsamiqSans.className} outline-none border-none`}>Esta Temporada</option>
                                 <option value="allSeason" className="outline-none border-none">Todas Temporadas</option>
                             </select>
 
-                            <select value={selectedMode} onChange={handleModeChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none"
+                            <select value={selectedMode} onChange={handleModeChange} className="p-2 bg-gray-800 text-white rounded-md outline-none border-none mr-4"
                             >
                                 {modes.map(mode => (
                                     <option key={mode} value={mode}>{mode}</option>
@@ -54,9 +51,7 @@ export const ModeStatsMenu = ({ stats, battlePass, account }: ModeStatsMenuProps
                             </select>
 
                             <div className="w-full">
-                                {/* {selectedStats && mainPage && ( */}
                                 <StatCard key='seasons' stats={selectedStats} mode={selectedMode} battlePass={battlePass} isAll={false} />
-                                {/* )} */}
                             </div>
                         </div>
                     </>
