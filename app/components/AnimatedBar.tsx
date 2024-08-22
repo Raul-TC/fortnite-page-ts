@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface CustomStyle extends React.CSSProperties {
     '--progress-width'?: string;
 }

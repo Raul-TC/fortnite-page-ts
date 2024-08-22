@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import { useCosmetics } from '../hooks/useCosmetics'
 import { FormattedItem, TypesCosmetics } from '../api/cosmetics'
 import { useExpandItem } from '../hooks/useExpandItem'

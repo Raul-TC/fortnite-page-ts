@@ -1,7 +1,7 @@
 import '../assets/StyleBar.css'
 import { luckiestGuy, balsamiqSans } from '../assets/fonts'
 import useLocaleDateConvert from '../hooks/useLocaleDateConvert';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import clock from '../assets/clock.svg'
 import top10img from '../assets/top10.svg'
 import top25img from '../assets/top25.svg'
@@ -16,8 +16,7 @@ import killsImg from '../assets/kills.svg'
 import death from '../assets/death.svg'
 import kdaImg from '../assets/kda.svg'
 import updateTime from '../assets/updateTime.svg'
-import star from '../assets/star.svg'
-import { All, BattlePass, CombinedStats, CustomStats } from '../api/stats';
+import { BattlePass, CombinedStats } from '../api/stats';
 import { AnimatedBar } from './AnimatedBar';
 
 interface SeasonStats {
@@ -152,8 +151,8 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
 
 
     return (
-        <div className={`${balsamiqSans.className} font-bold relative m-auto bg-bg-header text-base rounded-md w-[98%]`}>
-            <div className='flex items-center px-4 border-b border-gray-500 w-full py-4'>
+        <div className={`${balsamiqSans.className} font-bold relative bg-bg-header text-base rounded-md w-full p-4`}>
+            <div className='flex items-center border-b border-gray-500 w-full pb-4'>
                 <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{isAll ? 'Resumen Global' : `Resumen ${mode}`} </h2>
                 <div>
                     <div className={commonClass}>
@@ -163,36 +162,36 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
                 </div>
 
             </div>
-            <div className='flex justify-between items-center gap-4 flex-wrap w-full px-4 my-4'>
+            <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1  gap-4 flex-wrap w-full my-4'>
 
-                <div className='bg-gray-800 flex flex-row items-center gap-2 py-2 px-4 rounded-md' >
+                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
                     <img src={percent.src} alt="" className='w-7 h-7' />
-                    <div>
+                    <div className='text-center'>
                         <p>% Victoria</p>
                         <h3 className='text-4xl'>{winRate}</h3>
                     </div>
                 </div>
-                <div className='bg-gray-800 flex flex-row items-center gap-2 py-2 px-4 rounded-md' >
+                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
                     <img src={winsImg.src} alt="" className='w-7 h-7' />
-                    <div>
+                    <div className='text-center'>
                         <p>Victorias</p>
                         <h3 className='text-4xl'>{winCount ?? allWins}</h3>
                     </div>
                 </div>
-                <div className='bg-gray-800 flex flex-row items-center gap-2 py-2 px-4 rounded-md' >
+                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
                     <img src={kdaImg.src} alt="" className='w-7 h-7' />
 
-                    <div>
+                    <div className='text-center'>
                         <p>K / D</p>
                         <h3 className='text-4xl'>{parseFloat(kd?.toFixed(2)) || parseFloat(allKD?.toFixed(2))}</h3>
 
                     </div>
                 </div>
-                <div className='bg-gray-800 flex flex-row items-center gap-2 py-2 px-4 rounded-md' >
+                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
 
                     <img src={killsImg.src} alt="" className='w-7 h-7' />
 
-                    <div>
+                    <div className='text-center'>
                         <p>Asesinatos</p>
                         <h3 className='text-4xl'>{kills ?? allKills}</h3>
                     </div>
@@ -201,7 +200,7 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
             </div>
 
             {isAll ? <div className='w-full'>
-                <div className='flex gap-2 w-full items-center px-2'>
+                <div className='flex gap-2 w-full items-center '>
 
                     <h4 className='text-lg '><span className='text-green-500'>Victorias</span> {allWins}</h4>
                     <h4 className='text-lg '><span className='text-blue-500'>Top 10/25</span> {solo?.top10 + solo?.top25}</h4>
@@ -216,7 +215,6 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
                     <div className='flex gap-2 w-full items-center px-2'>
 
                         <h4 className='text-lg '><span className='text-green-500'>Victorias</span> {winCount}</h4>
-                        {/* {mode !== 'trio' && <h4 className='text-lg '><span className='text-red-500'>%Victoria</span> {deaths}</h4>} */}
                         {mode === 'solo' && <h4 className='text-lg '><span className='text-blue-500'>Top 10/25</span> {top10 + top25}</h4>}
                         {mode === 'duo' && <h4 className='text-lg '><span className='text-orange-500'>Top 5/12</span> {top5 + top12}</h4>}
                         {mode === 'trio' && <h4 className='text-lg '><span className='text-purple-500'>Top 3/6</span> {placetop3 + placetop6}</h4>}
@@ -226,7 +224,7 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
                 </div>
 
             }
-            <div className='w-full relative bg-gray-300 rounded-full overflow-hidden progress-bar-container' style={{ height: `${containerHeight}px` }}>
+            <div className='w-full relative block bg-gray-300 rounded-full overflow-hidden progress-bar-container' style={{ height: `${containerHeight}px` }}>
                 {bars.map((bar, index) => (
                     <AnimatedBar
                         key={bar.key}

@@ -4,7 +4,6 @@ import CurrentDay from './CurrentDay'
 import CountDown from './CountDown'
 import { Rewards } from './Rewards'
 import { useRewards } from '../hooks/useRewards'
-import useLocaleDateConvert from '../hooks/useLocaleDateConvert'
 
 interface Props {
     currentPage: number

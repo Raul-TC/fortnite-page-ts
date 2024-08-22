@@ -1,5 +1,4 @@
 import { getItem } from '../services/fetchData'
-import { useFormatedDate } from '../hooks/useFormatedDate'
 import { luckiestGuy } from '../assets/fonts'
 import { ImageSlider } from './ImageSlider'
 import { MdOutlineImageNotSupported } from 'react-icons/md'

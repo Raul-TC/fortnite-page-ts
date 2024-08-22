@@ -1,7 +1,6 @@
 import { DisplayAsset } from "../api/shop"
 import { SectionShop } from "./SectionShop"
 import { getShop } from "../services/fetchData"
-import CurrentDay from "./CurrentDay"
 
 const ItemsShop = async () => {
     const { shop } = await getShop()

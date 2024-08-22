@@ -1,10 +1,5 @@
 'use client'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
-// import { TiMicrophone } from 'react-icons/ti'
-// import { AiFillSkin } from 'react-icons/ai'
-// import { BsBackpack } from 'react-icons/bs'
-// import { BiSolidSprayCan } from 'react-icons/bi'
-// import { LuFlower } from 'react-icons/lu'
 import decoration from '../assets/decoration.svg'
 import gesto from '../assets/gestoSVG.svg'
 import envoltorio from '../assets/wrapper.svg'
@@ -35,9 +30,6 @@ const iconComponents: Record<string, IconComponent> = {
     'Picos': { icon: <img src={pico.src} />, text: 'Pico' },
     'Mascota': { icon: <img src={pets.src} />, text: 'Mascota' },
     'Ala delta': { icon: <img src={delta.src} />, text: 'Ala delta' },
-    // 'Ala delta': { icon: <TbParachute />, text: 'Ala delta' },
-    // 'Grafiti': { icon: <BiSolidSprayCan />, text: 'Grafiti' },
-    // 'Decoración': { icon: <LuFlower />, text: 'Decoración' },
     'Mochila': { icon: <img src={mochila.src} alt='' className='' />, text: 'Mochila' },
     'Decoración': { icon: <img src={decoration.src} alt='' className='' />, text: 'Decoración' },
     'Grafiti': { icon: <img src={spray.src} alt='' className='text-white' />, text: 'Grafiti' },
@@ -72,7 +64,6 @@ const Menu = ({ nameType, index, value, expandedItem, handleFilters, filters, ha
             <div className={`flex flex-col w-full bg-[#1c1c1c] scroll-m-1 absolute z-30 py-2 ${expandedItem === index ? 'opacity-100 block transition-opacity ease-out' : 'opacity-0 hidden'} `}>
 
                 {value.map((el, index) => {
-                    // console.log(el.name === 'Pico')
                     return (
                         <i
                             key={index} onClick={() => {

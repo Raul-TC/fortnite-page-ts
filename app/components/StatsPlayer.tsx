@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { luckiestGuy } from '../assets/fonts'
 import { getStats } from '../services/fetchData'
 import { ModeStatsMenu } from './ModeStatsMenu'
 import SkeletonStats from './SkeletonStats'
@@ -29,8 +28,6 @@ const PlayerStats = async ({ name, accountType, isSearchValid }: PlayerStatsProp
         </div>
     }
 
-    console.log(name)
-    console.log(accountType)
     return (
         <>
             {isSearchValid &&

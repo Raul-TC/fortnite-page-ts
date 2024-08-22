@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import whiteModeLogo from '../assets/FortniteLogoWhite.svg'
 
 const Logo = () => {

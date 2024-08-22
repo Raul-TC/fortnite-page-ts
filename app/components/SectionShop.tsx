@@ -3,7 +3,6 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import { luckiestGuy } from "../assets/fonts";
 import BackgroundCard from "./BackgroundCard";
-import Image from "next/image";
 import { ShopArray } from "../api/shop";
 import { ImageSlider } from "./ImageSlider";
 interface SectionShopProps {
