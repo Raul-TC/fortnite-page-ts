@@ -20,12 +20,12 @@ const SkeletonHome = () => {
             <div className='m-auto w-20 h-6 animate-pulse bg-gray-500 rounded-md my-6' />
 
             <div className='grid grid-cols-2 md:grid-cols-6  h-full w-full justify-center items-center m-auto gap-2'>
-                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md' />
-                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md' />
-                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md' />
-                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md' />
-                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md' />
-                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md' />
+                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md m-auto' />
+                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md m-auto' />
+                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md m-auto' />
+                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md m-auto' />
+                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md m-auto' />
+                <div className='animate-pulse bg-gray-400 h-36 w-36 rounded-md m-auto' />
 
             </div>
 
