@@ -3,6 +3,7 @@ import { getBattlePass } from "./services/fetchData";
 import SkeletonHome from "./components/SkeletonHome";
 import Pagination from "./components/Pagination";
 import BattlePass from "./components/BattlePass";
+import { randomUUID } from "crypto";
 
 export const metadata = {
   title: 'Pase de Batalla',
@@ -30,11 +31,11 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <>
-      <Suspense fallback={<SkeletonHome />}>
+      <Suspense key={crypto.randomUUID()} fallback={<SkeletonHome />}>
         <BattlePass currentPage={currentPage} arr={arr} info={info} seasonDates={seasonDates} videos={videos} />
+        <Pagination totalPages={totalPages} />
       </Suspense>
 
-      <Pagination totalPages={totalPages} />
     </>
 
 
