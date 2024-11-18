@@ -48,20 +48,21 @@ interface MenuProps {
     handleExpandItem: ({ index }: { index: boolean | number }) => void,
 }
 const Menu = ({ nameType, index, value, expandedItem, handleFilters, filters, handleExpandItem }: MenuProps) => {
+
     return (
         <ul className='bg-yellowFortnite cursor-pointer relative rounded-md' onClick={() => handleExpandItem({ index })}>
-            <div className='flex items-center justify-between '>
+            <div className='flex items-center justify-center px-4 py-2 gap-2 '>
 
-                <p className=' pl-6 pr-8 py-2  text-bg-header font-bold rounded-md overflow-hidden cursor-pointer'>{nameType.toUpperCase()}: {filters[nameType]}</p>
+                <p className='text-bg-header font-bold rounded-md overflow-hidden cursor-pointer text-start'>{nameType.toUpperCase()}: {filters[nameType]}</p>
 
                 {expandedItem === index ?
-                    <IoIosArrowDown className={`text-bg-body mx-2 text-2xl absolute right-0 opacity-100 block ease-out transition-opacity`} />
+                    <IoIosArrowDown className={`text-bg-body text-2xl  right-0 opacity-100 block ease-out transition-opacity`} />
                     :
-                    <IoIosArrowUp className={`text-bg-body mx-2 text-2xl absolute right-0 opacity-100 block ease-out transition-opacity`} />
+                    <IoIosArrowUp className={`text-bg-body text-2xl  right-0 opacity-100 block ease-out transition-opacity`} />
                 }
             </div>
 
-            <div className={`flex flex-col w-full bg-[#1c1c1c] scroll-m-1 absolute z-30 py-2 ${expandedItem === index ? 'opacity-100 block transition-opacity ease-out' : 'opacity-0 hidden'} `}>
+            <div className={`flex flex-col w-full bg-[#1c1c1c] scroll-m-1 absolute z-30 py-2 transition-all duration-300 ease-in ${expandedItem === index ? 'animate-fade-in pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'} `}>
 
                 {value.map((el, index) => {
                     return (
@@ -70,7 +71,7 @@ const Menu = ({ nameType, index, value, expandedItem, handleFilters, filters, ha
                                 handleFilters({ data: { [nameType]: el.name } })
                                 handleExpandItem({ index: !expandedItem })
                             }}
-                            className='cursor-pointer flex gap-2 whitespace-nowrap overflow-hidden items-center  pl-4'
+                            className='cursor-pointer flex gap-2 whitespace-nowrap overflow-hidden items-center px-2 py-1 hover:bg-yellowFortnite hover:text-black'
                         >
                             {iconComponents[el.name]
                                 ? (
@@ -82,14 +83,13 @@ const Menu = ({ nameType, index, value, expandedItem, handleFilters, filters, ha
                                 : (
                                     <>
                                         {el.colors?.Color1 && <span style={{ backgroundColor: `${el.colors?.Color1}` }} className='min-w-4 h-4 rounded-full block' />}
-                                        <span className={`${el.colors?.Color1 ? 'text-ellipsis overflow-hidden pr-1' : 'm-auto'}`}>{capitalize(el.name)}</span>
+                                        <span className={`${el.colors?.Color1 ? 'text-ellipsis overflow-hidden pr-1' : 'm-auto'} `}>{capitalize(el.name)}</span>
                                     </>
                                 )}
                         </i>
                     )
                 })}
             </div>
-
         </ul>
     )
 }
