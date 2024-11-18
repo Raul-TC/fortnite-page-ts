@@ -6,7 +6,7 @@ const Skeleton = () => {
 
                 {[...Array(9)].map((_, index) => (
 
-                    <div key={index} className={`${index === 0 ? 'max-w-[474px] min-h-[342px] col-span-2 row-span-2' : 'max-w-[233px] max-h-[233px] row-span-1 col-span-1'} animate-pulse pb-4 flex flex-col justify-end items-start  bg-gray-400 rounded-lg flex-wrap w-full h-full`}>
+                    <div key={index} className={`${index === 0 ? 'max-w-[474px] min-h-[342px] col-span-2 row-span-2' : 'max-w-[233px] max-h-[233px] row-span-1 col-span-1'} animate-pulse pb-4 flex flex-col justify-end items-start  bg-gray-400 rounded-lg flex-wrap w-full h-full mx-auto aspect-square`}>
                         <div className='w-[60%] rounded-md mb-4 h-4 bg-gray-200 block m-auto' />
                         <div className='w-[20%] rounded-md h-4 bg-gray-200 ml-2 block self-end mr-2' />
                     </div>
