@@ -26,7 +26,7 @@ export const ImageSlider = ({ displayName, arrayImages, price, isItem, bg }: Ima
                     ? (
                         <div
                             key={`${index}_${displayName}`}
-                            className={`absolute rounded-md transition-opacity duration-700 ease-in w-full h-full top-0 left-0 bottom-0 right-0 z-10 ${el.isActive ? '  opacity-100 ' : ' opacity-0'} `}>
+                            className={`absolute rounded-md transition-opacity duration-700 ease-in w-full h-full top-0 left-0 bottom-0 right-0 z-10 aspect-square ${el.isActive ? '  opacity-100 ' : ' opacity-0'} `}>
 
                             <img
                                 src={bg}

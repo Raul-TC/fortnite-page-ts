@@ -52,13 +52,13 @@ const DetailsItem = async ({ itemID }: DetailsItemsProps) => {
 
             <div className='flex flex-col items-center m-auto mt-4 w-[90%] max-w-[1440px] min-h-[calc(100vh-96px)] mb-16 relative'>
                 <div className='grid grid-cols-1 items-center justify-center w-full rounded-md md:grid-cols-2'>
-                    <div className='flex flex-col items-center justify-center w-full'>
+                    <div className='flex flex-col items-center justify-center w-full h-full'>
                         {displayAssets.length > 1
                             ? (
-                                <div className='relative w-full h-full overflow-hidden rounded-md'>
-                                    <div className='relative w-full h-full overflow-hidden'>
-                                        <ImageSlider displayName={name} arrayImages={displayAssets} key={`${id}`} price={price} isItem bg={bg} />
-                                    </div>
+                                <div className='relative w-full h-full overflow-hidden rounded-md aspect-square'>
+                                    {/* <div className='relative w-full h-full overflow-hidden'> */}
+                                    <ImageSlider displayName={name} arrayImages={displayAssets} key={`${id}`} price={price} isItem bg={bg} />
+                                    {/* </div> */}
                                 </div>
                             )
                             : displayAssets.length > 0 || images.full_background
