@@ -33,7 +33,7 @@ const Player = async ({ searchParams }: PlayerProps) => {
 
     return (
         <>
-            <h1 className='text-center text-xl font-bold mt-[100px] md:text-4xl'>Buscar mis Estadísticas 🎯</h1>
+            <h1 className='text-center text-xl font-bold md:text-4xl'>Buscar mis Estadísticas 🎯</h1>
             <div className='flex justify-center items-center flex-wrap m-auto gap-2 text-center'>
                 <Search />
             </div>
@@ -42,7 +42,7 @@ const Player = async ({ searchParams }: PlayerProps) => {
                 <Suspense key={`${name}+${accountType}+${crypto.randomUUID()}`} fallback={<SkeletonStats />}>
                     <PlayerStats isSearchValid={isSearchValid} name={name} accountType={accountType} />
                 </Suspense>
-            ) : <h2 className='text-center mt-4 text-3xl'>Ingresa tu TagName y Selecciona la plataforma</h2>}
+            ) : <h2 className='text-center mt-4 text-2xl md:text-3xl'>Ingresa tu TagName y Selecciona la plataforma</h2>}
         </>
     )
 }
