@@ -73,7 +73,7 @@ export async function getStats({ name, accountType }: GetStatsParams): Promise<C
 
     } catch (error) {
         return {
-            status: 200, // Usando 200 para indicar que la función se ejecutó con éxito
+            status: 400, // Usando 200 para indicar que la función se ejecutó con éxito
             stack: true // Bandera personalizada para indicar que ocurrió un error
         };
     }

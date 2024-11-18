@@ -10,7 +10,6 @@ interface Stats {
 
 
 const useSearch = () => {
-    const { replace } = useRouter()
     const [stats, setStats] = useState<Stats>({ user: '', type: '', isEmpty: false })
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -21,7 +20,7 @@ const useSearch = () => {
     useEffect(() => {
         if (user && accountType) {
             setStats({ user, type: accountType, isEmpty: false })
-            resetStats()
+            // resetats()
         }
     }, [searchParams])
 
@@ -37,8 +36,8 @@ const useSearch = () => {
             params.set('name', stats.user)
             params.set('accountType', stats.type)
             setStats({ ...stats, isEmpty: false })
-            // replace(`${pathname}?${params.toString()}`)
             router.push(`${pathname}?${params.toString()}`,)
+            router.refresh()
         }
 
     }

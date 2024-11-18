@@ -18,6 +18,9 @@ import kdaImg from '../assets/kda.svg'
 import updateTime from '../assets/updateTime.svg'
 import { BattlePass, CombinedStats } from '../api/stats';
 import { AnimatedBar } from './AnimatedBar';
+import { StatCardItem } from './StatCardItem';
+import { StatsDashboard } from './StatsDashboard';
+import { ModesDashboard } from './ModesDashboard';
 
 interface SeasonStats {
     score: number,
@@ -75,7 +78,6 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
     const allKills = solo?.kills + duo?.kills + trio?.kills + squad?.kills
     const { handleLocalDate } = useLocaleDateConvert()
 
-    const commonClass = 'pl-3 text-gray-400 flex gap-1 items-center justify-center'
     const handleMinutes = useMemo(() => ({ time }: { time: number }) => {
         const minutos = time % 60
         const horas = Math.floor(time / 60) % 24
@@ -98,241 +100,144 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
     const topTrio = ((placetop3 + placetop6) / matchCount) * 100
     const topSquad = ((top3 + top6) / matchCount) * 100
 
-
     let bars: Bar[] = [];
-    switch (mode) {
-        case 'solo':
-            bars = [
-                { key: winRatePercent + 'winRate', color: 'bg-green-500', data: winRatePercent },
-                { key: topSolo + 'solo', color: 'bg-blue-500', data: topSolo },
-            ];
-            break;
-        case 'duo':
-            bars = [
-                { key: winRatePercent + 'winRate', color: 'bg-green-500', data: winRatePercent },
-                { key: topDuo + 'duo', color: 'bg-orange-500', data: topDuo },
-            ];
-            break;
-        case 'trio':
-            bars = [
-                { key: winRatePercent + 'winRate', color: 'bg-green-500', data: winRatePercent },
-                { key: topTrio + 'trio', color: 'bg-purple-500', data: topTrio },
-            ];
-            break;
-        case 'squad':
-            bars = [
-                { key: winRatePercent + 'winRate', color: 'bg-green-500', data: winRatePercent },
-                { key: topSquad + 'squad', color: 'bg-yellow-500', data: topSquad },
-            ];
-            break;
-        default:
-            bars = []; // Manejo del caso por defecto si es necesario
-            break;
-    }
+    const generateBars = (mode: string | undefined): Bar[] => {
+        const colors: { [key: string]: string } = {
+            solo: 'bg-blue-500',
+            duo: 'bg-orange-500',
+            trio: 'bg-purple-500',
+            squad: 'bg-yellow-500',
+        };
 
-    // Agregar barras adicionales si isAll es verdadero
-    if (isAll) {
-        bars = [
-            { key: 'winRate', color: 'bg-green-500', data: winRatePercent },
+        const data: { [key: string]: number } = {
+            solo: topSolo,
+            duo: topDuo,
+            trio: topTrio,
+            squad: topSquad,
+        };
+
+        return mode ? [
+            { key: `${winRatePercent}winRate`, color: 'bg-green-500', data: winRatePercent },
+            { key: `${mode}`, color: colors[mode ?? 'default'], data: data[mode ?? 'default'] },
+        ] :
+            [{ key: 'winRate', color: 'bg-green-500', data: winRatePercent },
             { key: 'AllSolo', color: 'bg-blue-500', data: allTopSolo },
             { key: 'AllDuo', color: 'bg-orange-500', data: allTopDuo },
             { key: 'AllTrio', color: 'bg-purple-500', data: allTopTrio },
-            { key: 'AllSquad', color: 'bg-yellow-500', data: allTopSquad }
-        ];
-    }
+            { key: 'AllSquad', color: 'bg-yellow-500', data: allTopSquad }]
+            ;
+    };
 
-    const maxData = Math.max(...bars.map(bar => bar.data));
-
-    // Ordenar las barras de menor a mayor data
+    bars = generateBars(mode)
     bars.sort((a, b) => b.data - a.data);
-    const totalBars = bars.length; // Cambia este número si agregas o quitas barras
     const containerHeight = 50; // Altura total del contenedor en px
     const factor = 1.5; // Factor para que cada barra mida un poco más de la mitad de la barra anterior
-
 
     return (
         <div className={`${balsamiqSans.className} font-bold relative bg-bg-header text-base rounded-md w-full p-4`}>
             <div className='flex items-center border-b border-gray-500 w-full pb-4'>
                 <h2 className={`${luckiestGuy.className} text-center text-3xl`}>{isAll ? 'Resumen Global' : `Resumen ${mode}`} </h2>
                 <div>
-                    <div className={commonClass}>
-                        <img src={clock.src} alt="" />
-                        <p><span className='text-white'>{handleMinutes({ time: (minutesPlayed ?? minutesplayed) || allTimePlayed })} Jugado</span></p>
-                    </div>
+                    <StatsDashboard icon={clock.src} text='Jugado:' stat={handleMinutes({ time: (minutesPlayed ?? minutesplayed) || allTimePlayed })} />
                 </div>
-
             </div>
+
+            {/* Global Dashboard */}
             <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1  gap-4 flex-wrap w-full my-4'>
-
-                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
-                    <img src={percent.src} alt="" className='w-7 h-7' />
-                    <div className='text-center'>
-                        <p>% Victoria</p>
-                        <h3 className='text-4xl'>{winRate}</h3>
-                    </div>
-                </div>
-                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
-                    <img src={winsImg.src} alt="" className='w-7 h-7' />
-                    <div className='text-center'>
-                        <p>Victorias</p>
-                        <h3 className='text-4xl'>{winCount ?? allWins}</h3>
-                    </div>
-                </div>
-                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
-                    <img src={kdaImg.src} alt="" className='w-7 h-7' />
-
-                    <div className='text-center'>
-                        <p>K / D</p>
-                        <h3 className='text-4xl'>{parseFloat(kd?.toFixed(2)) || parseFloat(allKD?.toFixed(2))}</h3>
-
-                    </div>
-                </div>
-                <div className='bg-gray-800 flex flex-row items-center justify-center gap-2 py-2 px-4 rounded-md' >
-
-                    <img src={killsImg.src} alt="" className='w-7 h-7' />
-
-                    <div className='text-center'>
-                        <p>Asesinatos</p>
-                        <h3 className='text-4xl'>{kills ?? allKills}</h3>
-                    </div>
-
-                </div>
+                <StatCardItem icon={percent.src} label='% Victoria' value={winRate} />
+                <StatCardItem icon={winsImg.src} label='Victorias' value={winCount ?? allWins} />
+                <StatCardItem icon={kdaImg.src} label='K / D' value={parseFloat((kd ?? allKD).toFixed(2))} />
+                <StatCardItem icon={killsImg.src} label='Asesinatos' value={kills ?? allKills} />
             </div>
 
+            {/* Queue Modes */}
             {isAll ? <div className='w-full'>
                 <div className='flex gap-2 w-full items-center '>
-
-                    <h4 className='text-lg '><span className='text-green-500'>Victorias</span> {allWins}</h4>
-                    <h4 className='text-lg '><span className='text-blue-500'>Top 10/25</span> {solo?.top10 + solo?.top25}</h4>
-                    <h4 className='text-lg '><span className='text-orange-500'>Top 5/12</span> {duo?.top5 + duo?.top12}</h4>
-                    <h4 className='text-lg '><span className='text-purple-500'>Top 3/6 (Trio)</span> {trio?.placetop3 + trio?.placetop6}</h4>
-                    <h4 className='text-lg '><span className='text-yellow-500'>Top 3/6 (Squad)</span> {squad.top3 + squad.top6}</h4>
-                    <h4 className='text-lg ml-auto'><span className='text-gray-300'>Partidas</span> {matchCount ?? allGames}</h4>
+                    <ModesDashboard color='text-green-500' text='Victorias' value={allWins} />
+                    <ModesDashboard color='text-blue-500' text='Top 10/25' value={solo?.top10 + solo?.top25} />
+                    <ModesDashboard color='text-orange-500' text='Top 5/12' value={duo?.top5 + duo?.top12} />
+                    <ModesDashboard color='text-purple-500' text='Top 3/6 (Trio)' value={trio?.placetop3 + trio?.placetop6} />
+                    <ModesDashboard color='text-yellow-500' text='Top 3/6 (Squad)' value={squad.top3 + squad.top6} />
+                    <ModesDashboard color='text-gray-500' text='Partidas' value={matchCount ?? allGames} />
                 </div>
             </div> :
 
                 <div className='w-full'>
                     <div className='flex gap-2 w-full items-center px-2'>
-
                         <h4 className='text-lg '><span className='text-green-500'>Victorias</span> {winCount}</h4>
-                        {mode === 'solo' && <h4 className='text-lg '><span className='text-blue-500'>Top 10/25</span> {top10 + top25}</h4>}
-                        {mode === 'duo' && <h4 className='text-lg '><span className='text-orange-500'>Top 5/12</span> {top5 + top12}</h4>}
-                        {mode === 'trio' && <h4 className='text-lg '><span className='text-purple-500'>Top 3/6</span> {placetop3 + placetop6}</h4>}
-                        {mode === 'squad' && <h4 className='text-lg '><span className='text-yellow-500'>Top 3/6</span> {top3 + top6}</h4>}
-                        <h4 className='text-lg ml-auto'><span className='text-gray-300'>Partidas</span> {matchCount}</h4>
+                        {mode === 'solo' && <ModesDashboard color='text-blue-500' text='Top 10/25' value={top10 + top25} />}
+                        {mode === 'duo' && <ModesDashboard color='text-orange-500' text='Top 5/12' value={top5 + top12} />}
+                        {mode === 'trio' && <ModesDashboard color='text-purple-500' text='Top 3/6' value={placetop3 + placetop6} />}
+                        {mode === 'trio' && <ModesDashboard color='text-yellow-500' text='Top 3/6' value={top3 + top6} />}
+                        {mode === 'trio' && <ModesDashboard color='text-gray-500' text='Partidas' value={matchCount} />}
                     </div>
                 </div>
-
             }
-            <div className='w-full relative block bg-gray-300 rounded-full overflow-hidden progress-bar-container' style={{ height: `${containerHeight}px` }}>
+
+            {/* Bars  */}
+            <div className='w-full relative block bg-gray-50 rounded-full overflow-hidden progress-bar-container' style={{ height: `${containerHeight}px` }}>
                 {bars.map((bar, index) => (
                     <AnimatedBar
                         key={bar.key}
                         color={bar.color}
                         data={bar.data}
-                        height={containerHeight / Math.pow(factor, index)} // Altura proporcional: un poco más de la mitad   
-                        zIndex={index * (containerHeight / totalBars)} // Posicionar cada barra sin espacios
+                        height={containerHeight / Math.pow(factor, index)}
+                        zIndex={index * (containerHeight / bars.length)}
                     />
                 )
-                )}  </div>
+                )}
+            </div>
 
+
+            {/* AllStats Cards */}
             {!isAll && <>
                 <div className='flex justify-between my-4 flex-wrap gap-y-6 gap-x-4 px-4 py-2 w-full'>
+                    <StatsDashboard icon={winsImg.src} text='Ganadas:' stat={winCount} />
+                    <StatsDashboard icon={killsImg.src} text='Asesinatos:' stat={kills} />
 
-                    <div className={commonClass}>
-                        <img src={winsImg.src} alt="" />
-
-                        <p>Ganadas: <span className='text-white'>{winCount}</span></p>
-                    </div>
-                    <div className={commonClass}>
-                        <img src={killsImg.src} alt="" />
-
-                        <p>Asesinatos: <span className='text-white'>{kills}</span></p>
-                    </div>
                     {
                         mode === 'solo' && (
                             <>
-                                <div className={commonClass}>
-                                    <img src={top10img.src} alt="" />
-                                    <p>Top 10:<span className='text-white'> {top10}</span></p>
-                                </div>
-                                <div className={commonClass}>
-                                    <img src={top25img.src} alt="" />
-                                    <p>Top 25: <span className='text-white'>{top25}</span></p>
-                                </div>
+                                <StatsDashboard icon={top10img.src} text='Top 10:' stat={top10} />
+                                <StatsDashboard icon={top25img.src} text='Top 25:' stat={top25} />
                             </>
                         )
                     }
                     {
                         mode === 'duo' && (
                             <>
-                                <div className={commonClass}>
-                                    <img src={top5img.src} alt="" />
-                                    <p>Top 5: <span className='text-white'>{top5}</span></p>
-                                </div>
-                                <div className={commonClass}>
-                                    <img src={top12img.src} alt="" />
-                                    <p>Top 12: <span className='text-white'>{top12}</span></p>
-                                </div>
+                                <StatsDashboard icon={top5img.src} text='Top 5:' stat={top5} />
+                                <StatsDashboard icon={top12img.src} text='Top 12:' stat={top12} />
                             </>
                         )
                     }
                     {
                         mode === 'trio' && (
                             <>
-                                <div className={commonClass}>
-                                    <img src={top3img.src} alt="" />
-                                    <p>Top 3: <span className='text-white'>{placetop3}</span></p>
-                                </div>
-                                <div className={commonClass}>
-                                    <img src={top6img.src} alt="" />
-                                    <p>Top 6: <span className='text-white'>{placetop6}</span></p>
-                                </div>
+                                <StatsDashboard icon={top3img.src} text='Top 3:' stat={placetop3} />
+                                <StatsDashboard icon={top6img.src} text='Top 6:' stat={placetop6} />
                             </>
                         )
                     }
                     {
                         mode === 'squad' && (
                             <>
-                                <div className={commonClass}>
-                                    <img src={top3img.src} alt="" />
-                                    <p>Top 3: <span className='text-white'>{top3}</span></p>
-                                </div>
-                                <div className={commonClass}>
-                                    <img src={top6img.src} alt="" />
-                                    <p>Top 6: <span className='text-white'>{top6}</span></p>
-                                </div>
+                                <StatsDashboard icon={top3img.src} text='Top 3:' stat={top3} />
+                                <StatsDashboard icon={top6img.src} text='Top 6:' stat={top6} />
                             </>
                         )
                     }
                     {
                         mode !== 'trio' && (
-                            <div className={commonClass}>
-                                <img src={death.src} alt="" />
-                                <p>Muertes: <span className='text-white'>{deaths}</span></p>
-                            </div>
+                            <StatsDashboard icon={death.src} text='Muertes:' stat={deaths} />
                         )
                     }
-                    <div className={commonClass}>
-                        <img src={kdaImg.src} alt="" />
-                        <p>K / D: <span className='text-white'>{parseFloat(kd?.toFixed(2))}</span></p>
-                    </div>
-                    <div className={commonClass}>
-                        <img src={games.src} alt="" />
-                        <p>Partidas: <span className='text-white'>{matchCount}</span></p>
-                    </div>
-                    <div className={commonClass}>
-                        <img src={percent.src} alt="" />
-                        <p>% Victorias: <span className='text-white'>{winRate}%</span></p>
-                    </div>
-                    <div className={commonClass}>
-                        <img src={clock.src} alt="" />
-                        <p>Tiempo Jugado: <span className='text-white'>{handleMinutes({ time: minutesPlayed ?? minutesplayed })}</span></p>
-                    </div>
-                    <div className={commonClass}>
-                        <img src={updateTime.src} alt="" />
-                        <p>Actualizado: <span className='text-white'> {lastUpdate}</span></p>
-                    </div>
+
+                    <StatsDashboard icon={kdaImg.src} text='K / D:' stat={parseFloat(kd?.toFixed(2))} />
+                    <StatsDashboard icon={games.src} text='Partidas:' stat={matchCount} />
+                    <StatsDashboard icon={percent.src} text='% Victorias:' stat={winRate} />
+                    <StatsDashboard icon={clock.src} text='Tiempo Jugado:' stat={handleMinutes({ time: minutesPlayed ?? minutesplayed })} />
+                    <StatsDashboard icon={updateTime.src} text='Actualizado:' stat={lastUpdate} />
 
                 </div>
             </>}

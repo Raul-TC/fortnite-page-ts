@@ -4,6 +4,7 @@ interface CustomStyle extends React.CSSProperties {
 
 export const AnimatedBar = ({ color, data, height, zIndex }: { color: string, data: number, height: number, zIndex: number }) => {
     // @ts-ignore
+    // console.log({ color, zIndex })
     const barStyle: CustomStyle = {
         '--progress-width': `${data}%`,
         height: height,
