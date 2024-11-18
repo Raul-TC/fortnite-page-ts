@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic'
 export default async function Home() {
     return (
         <Suspense fallback={<SkeletonCards />}>
-            <CountDown isShop date="false" />
+            <CountDown isShop date="false" message='Cargando Contador⌛' />
             <ItemsShop />
         </Suspense>
     )
