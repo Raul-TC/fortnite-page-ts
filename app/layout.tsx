@@ -5,12 +5,14 @@ import Header from "./components/Header";
 
 import { balsamiqSans } from './assets/fonts'
 import Link from "next/link";
+import NextTopLoader from "nextjs-toploader";
 
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
       <body className={`${balsamiqSans.className} bg-bg-body text-white pb-[80px]`}>
+        <NextTopLoader color="#F7FF19" />
         <Header />
         <div className='w-[95%] max-w-[1440px] m-auto  mt-[100px] md:min-h-[95vh]'>
           {children}

@@ -27,20 +27,20 @@ export const SectionShop = ({ el }: SectionShopProps) => {
                         <Link
                             key={`${index}_${child.mainId}`}
                             href={`/cosmetics/${child.mainId}`}
-                            className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2' : ''}  text-sm rounded-md overflow-hidden self-start cursor-pointer w-full hover:scale-110 active:scale-90 hover:z-40 transition-transform ease-in-out duration-200`}
+                            className={`${child.displayName.includes('Lote') || child.displayName.includes('LOTE') || child.displayName.includes('PAQUETE') || child.displayName.includes('Pack') || el.section.includes('Lotes') ? 'col-span-2 row-span-2' : ''}  text-sm rounded-md overflow-hidden self-start cursor-pointer w-full active:scale-90 hover:opacity-40 h-full transition-transform ease-in duration-300`}
                         >
                             {child.displayAssets.length > 1 ? (
-                                <div className='flex w-full h-full overflow-hidden rounded-md flex-col items-center justify-center '>
-                                    <div className='relative top-0 bottom-0 h-full w-full overflow-hidden z-0'>
-                                        <ImageSlider
-                                            key={`${index}_${child.mainId}`}
-                                            displayName={child.displayName}
-                                            arrayImages={child.displayAssets}
-                                            price={child.price}
-                                            isItem={false}
-                                            bg={child.bg ?? child.bgDefault}
-                                        />
-                                    </div>
+                                <div className='relative top-0 left-0 right-0 bottom-0 flex w-full h-full aspect-square rounded-md flex-col items-center justify-center'>
+                                    {/* <div className='relative top-0 bottom-0 h-full w-full flex'> */}
+                                    <ImageSlider
+                                        key={`${index}_${child.mainId}`}
+                                        displayName={child.displayName}
+                                        arrayImages={child.displayAssets}
+                                        price={child.price}
+                                        isItem={false}
+                                        bg={child.bg ?? child.bgDefault}
+                                    />
+                                    {/* </div> */}
                                 </div>
                             ) : (
                                 <div className='relative w-full h-full rounded-md' key={child.displayName}>
