@@ -71,11 +71,11 @@ interface StatCardProps {
 const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
     const { solo, duo, trio, squad, wins, kills, placetop1, placetop3, top3, top5, top6, placetop6, top10, top12, top25, deaths, kd, matches, matchesplayed, minutesplayed, lastModified, minutesPlayed } = stats as SeasonStats & TrioStats & CombinedStats
 
-    const allTimePlayed = solo?.minutesPlayed + duo?.minutesPlayed + trio?.minutesplayed + squad?.minutesPlayed
-    const allWins = solo?.wins + duo?.wins + trio?.placetop1 + squad?.wins
-    const allGames = solo?.matches + duo?.matches + trio?.matchesplayed + squad?.matches
-    const allKD = solo?.kd + duo?.kd + trio?.kd + squad?.kd
-    const allKills = solo?.kills + duo?.kills + trio?.kills + squad?.kills
+    const allTimePlayed = solo?.minutesPlayed + duo?.minutesPlayed + (trio?.minutesplayed || 0) + squad?.minutesPlayed
+    const allWins = solo?.wins + duo?.wins + (trio?.placetop1 || 0) + squad?.wins
+    const allGames = solo?.matches + duo?.matches + (trio?.matchesplayed || 0) + squad?.matches
+    const allKD = solo?.kd + duo?.kd + trio?.kd || 0 + squad?.kd
+    const allKills = solo?.kills + duo?.kills + trio?.kills || 0 + squad?.kills
     const { handleLocalDate } = useLocaleDateConvert()
 
     const handleMinutes = useMemo(() => ({ time }: { time: number }) => {

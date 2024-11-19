@@ -15,7 +15,7 @@ const Search = () => {
 
     let isEmpty = stats.user === '' && stats.type === ''
     return (
-        <form className='w-full' onSubmit={e => handleSubmit({ e: e })}>
+        <form className='w-full' onSubmit={handleSubmit}>
             <div className='flex justify-between gap-4 my-4 w-full md:w-1/2 mx-auto'>
                 <input type='search' className=' rounded-md pl-2 py-2 outline-none text-gray-500 md:w-full' placeholder={stats.user || 'lilRauw5505'} onChange={(e) => setStats({ ...stats, user: e.target.value })} value={stats.user} />
                 <button type='submit' disabled={isEmpty} className={` text-bg-header w-full md:w-28 rounded-md font-bold ${isEmpty ? 'bg-gray-500' : 'bg-yellowFortnite active:scale-95 cursor-pointer'} transition-transform ease-out duration-200`}>Buscar</button>
