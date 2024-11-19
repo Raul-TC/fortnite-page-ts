@@ -41,6 +41,7 @@ export async function getStats({ name, accountType }: GetStatsParams): Promise<C
             }, { cache: 'no-store' }),
         ])
 
+        console.log({ stats })
         const statsOtherAPI: URLStatsID = await fetchWithHeaders(`https://fortniteapi.io/v1/stats?account=${stats.data.account.id}`, {
             'Content-Type': 'application/json',
             Authorization: process.env.API_FORTNITE || '',

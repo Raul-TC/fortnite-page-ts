@@ -36,37 +36,28 @@ export async function GET(req: Request, { params }: { params: { name: string | u
                 'Content-Type': 'application/json',
                 Authorization: API_FORTNITEV2,
             }, {
-                next: {
-                    revalidate: 60
-                }
+                cache: 'no-store'
             }),
             fetchWithHeaders(`https://fortnite-api.com/v2/stats/br/v2/?name=${name}&accountType=${accountType}&timeWindow=season`, {
                 'Content-Type': 'application/json',
                 Authorization: API_FORTNITEV2,
             }, {
-                next: {
-                    revalidate: 60
-                }
+                cache: 'no-store'
             }),
         ])
-
-        console.log({ stats })
-        console.log({ season })
 
         const statsOtherAPI: URLStatsID = await fetchWithHeaders(`https://fortniteapi.io/v1/stats?account=${stats.data.account.id}`, {
             'Content-Type': 'application/json',
             Authorization: API_FORTNITE,
         }, {
-            next: {
-                revalidate: 60
-            }
+            cache: 'no-store'
         });
 
         const lifetimeStats: CombinedStats = {
             // ...stats.data.stats.all,
             solo: stats.data.stats.all.solo,
             duo: stats.data.stats.all.duo,
-            trio: statsOtherAPI.global_stats.trio,
+            trio: statsOtherAPI.global_stats?.trio,
             squad: stats.data.stats.all.squad,
         };
 
@@ -78,7 +69,7 @@ export async function GET(req: Request, { params }: { params: { name: string | u
                 season: {
                     solo: season.data.stats.all.solo,
                     duo: season.data.stats.all.duo,
-                    trio: season.data.stats.all.trio,
+                    trio: season.data.stats.all?.trio,
                     squad: season.data.stats.all.squad,
                 },
             },

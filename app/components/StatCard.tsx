@@ -168,8 +168,8 @@ const StatCard = ({ stats, mode, isAll }: StatCardProps) => {
                         {mode === 'solo' && <ModesDashboard color='text-blue-500' text='Top 10/25' value={top10 + top25} />}
                         {mode === 'duo' && <ModesDashboard color='text-orange-500' text='Top 5/12' value={top5 + top12} />}
                         {mode === 'trio' && <ModesDashboard color='text-purple-500' text='Top 3/6' value={placetop3 + placetop6} />}
-                        {mode === 'trio' && <ModesDashboard color='text-yellow-500' text='Top 3/6' value={top3 + top6} />}
-                        {mode === 'trio' && <ModesDashboard color='text-gray-500' text='Partidas' value={matchCount} />}
+                        {mode === 'squad' && <ModesDashboard color='text-yellow-500' text='Top 3/6' value={top3 + top6} />}
+                        <ModesDashboard color='text-gray-500' text='Partidas' value={matchCount} />
                     </div>
                 </div>
             }
