@@ -14,13 +14,6 @@ const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
     const accountType = params.get('accountType')
     const [error, setError] = useState(false)
     useEffect(() => {
-        // if (initialStats) return;
-
-        console.log('me ejecuto AL SEARCH')
-        // setPlayerStats({})
-        // setLoading(true)
-        // setLo
-        // console.log({ name, accountType })
         if (!name || !accountType) return
         const getPlayerStats = async () => {
             setLoading(true)
@@ -47,7 +40,6 @@ const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
 
     }, [name, accountType])
 
-    // console.log({ stats })
     if (loading) {
         console.log('cargando')
         return <SkeletonStats />

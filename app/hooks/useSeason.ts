@@ -8,8 +8,6 @@ type ModeType = 'solo' | 'duo' | 'trio' | 'squad';
 export function useSeason({ stats }: { stats?: { allSeason: CombinedStats, season: All } }) {
     const [selectedSeason, setSelectedSeason] = useState<SeasonType>('season');
     const [selectedMode, setSelectedMode] = useState<ModeType>('solo');
-
-    console.log({ stats })
     const handleSeasonChange = (e: ChangeEvent<HTMLSelectElement>) => {
 
         const newSeason = e.target.value as SeasonType;

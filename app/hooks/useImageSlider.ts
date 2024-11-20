@@ -9,9 +9,7 @@ interface UseImageSliderProps {
 
 export function useImageSlider({ arrayImages, displayName }: UseImageSliderProps) {
     const [counter, setCounter] = useState(0)
-    // const imagesMemo = useMemo(() => arrayImages, [arrayImages])
 
-    console.log({ counter })
     const optimizedImages = useMemo(() => {
         return arrayImages.map((el, index) => ({
             ...el,

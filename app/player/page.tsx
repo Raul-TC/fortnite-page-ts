@@ -29,7 +29,6 @@ export default async function ({ searchParams }: PlayerProps) {
     const { name, accountType } = searchParams
     let initialStats = null;
     let error = ''
-    console.log('hola')
     if (name && accountType) {
         try {
             // Fetch inicial solo si hay parámetros

@@ -15,13 +15,9 @@ interface ItemProps {
 
 const Item = async ({ params }: ItemProps) => {
 
-    // const details = await getItem({ itemID: params.item })
-    console.log(params)
-
     return (
         <>
             <Suspense fallback={<SkeletonItem />}>
-                {/* <DetailsItem itemID={details} /> */}
                 <DetailsItem itemID={params.item} />
             </Suspense>
         </>
@@ -34,7 +30,6 @@ export default Item
 export async function generateMetadata({ params }: ItemProps) {
     try {
         const parr = params
-        console.log(parr)
         const skin = await fetch(URL_ITEM({ id: params.item }), {
             headers: {
                 'Content-Type': 'application/json',

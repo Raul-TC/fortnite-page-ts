@@ -18,7 +18,6 @@ interface ImageSliderProps {
 export const ImageSlider = ({ displayName, arrayImages, price, isItem, bg }: ImageSliderProps) => {
     const { optimizedImages } = useImageSlider({ arrayImages, displayName });
 
-    console.log({ optimizedImages })
     return (
         <>
             {optimizedImages.map((el, index) => (

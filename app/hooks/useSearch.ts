@@ -28,8 +28,6 @@ const useSearch = () => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        // console.log(params)
-
         if (stats.user.trim() === '' || stats.type.trim() === '') {
             setStats({ ...stats, isEmpty: true })
             return
