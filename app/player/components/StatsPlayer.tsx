@@ -7,7 +7,7 @@ import SkeletonStats from '@/app/components/SkeletonStats'
 
 
 const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
-    const [playerStats, setPlayerStats] = useState<CustomStats>(initialStats)
+    const [playerStats, setPlayerStats] = useState<CustomStats>(initialStats || null)
     const [loading, setLoading] = useState(false)
     const params = useSearchParams()
     const name = params.get('name')
@@ -17,7 +17,9 @@ const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
         // if (initialStats) return;
 
         console.log('me ejecuto AL SEARCH')
-
+        // setPlayerStats({})
+        // setLoading(true)
+        // setLo
         // console.log({ name, accountType })
         if (!name || !accountType) return
         const getPlayerStats = async () => {
