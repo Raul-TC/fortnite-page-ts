@@ -28,14 +28,15 @@ interface PlayerProps {
 export default async function ({ searchParams }: PlayerProps) {
     const { name, accountType } = searchParams
     let initialStats = null;
-
+    let error = ''
     console.log('hola')
     if (name && accountType) {
         try {
             // Fetch inicial solo si hay parámetros
-            const responseStats = await fetch(`${process.env.FRONTEND_NEXT_PUBLIC}/api/player-stats/${name}/${accountType}`);
+            const responseStats = await fetch(`${process.env.FRONTEND_NEXT_PUBLIC}/api/player-stats/${name}/${accountType}`, { cache: 'no-store' });
 
             if (!responseStats.ok) {
+                error = `Username ${name} no encontrado :(`
                 throw new Error('Error fetching player stats');
             }
             initialStats = await responseStats.json()
@@ -44,75 +45,19 @@ export default async function ({ searchParams }: PlayerProps) {
         }
     }
 
-    revalidatePath('/player')
-    // const isSearchValid = name && accountType && name.trim() !== '';
-    // const [stats, setStats] = useState<CustomStats>()
-    // const [loading, setLoading] = useState(false)
-    // const getPlayerStats = async () => {
-
-    //     if (!stats || !name || !accountType) return
-    //     try {
-    //         const resp = await getStats({ name, accountType })
-    // redirect('/player')
-
-    //         if (!resp.stats) {
-    //             throw new Error('Usuario no encontrado')
-    //         }
-
-    //         console.log({ resp })
-    //     } catch (error) {
-    //         console.log({ error })
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     if (!searchParams) return;
-
-    //     console.log('me ejecuto AL SEARCH')
-    //     const { name, accountType } = searchParams
-
-    //     console.log({ name, accountType })
-    //     if (!name || !accountType) return
-    //     const getPlayerStats = async () => {
-    //         setLoading(true)
-    //         if (name === '' || accountType === '') return
-    //         try {
-    //             const response = await fetch(`/api/player-stats/${name}/${accountType}`);
-
-    //             if (!response.ok) {
-    //                 throw new Error('Usuario no encontrado')
-    //             }
-
-    //             const respJson = await response.json()
-    //             setStats(respJson)
-    //         } catch (error) {
-    //             console.log({ error })
-    //         } finally {
-    //             setLoading(false)
-    //         }
-    //     }
-    //     // if (isSearchValid) {
-    //     getPlayerStats(); // Llama a la función si los parámetros son válidos
-
-    // }, [searchParams])
-
-    // // console.log({ stats })
-    // if (loading) {
-    //     return <SkeletonStats />
-    // }
-    // console.log({ initialStats })
     return (
         <>
             <h1 className='text-center text-xl font-bold md:text-4xl'>Buscar mis Estadísticas 🎯</h1>
             <div className='flex justify-center items-center flex-wrap m-auto gap-2 text-center'>
                 <Search />
+                {/* {error && <h2>{error}</h2>} */}
                 {initialStats ?
 
                     <Suspense fallback={<SkeletonStats />}>
                         <StatsPlayer initialStats={initialStats} />
                     </Suspense>
                     :
-                    <h2 className='text-center mt-4 text-2xl md:text-3xl'>Ingresa tu TagName y Selecciona la plataforma</h2>
+                    <h2 className='text-center mt-4 text-2xl md:text-3xl'>{error || 'Ingresa tu TagName y Selecciona la plataforma'}</h2>
                 }
             </div>
 

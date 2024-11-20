@@ -61,6 +61,20 @@ export async function GET(req: Request, { params }: { params: { name: string | u
             squad: stats.data.stats.all.squad,
         };
 
+        console.log({
+            ...stats,
+            ...stats.data,
+            stats: {
+                allSeason: lifetimeStats,
+                season: {
+                    solo: season.data.stats.all.solo,
+                    duo: season.data.stats.all.duo,
+                    trio: season.data.stats.all?.trio,
+                    squad: season.data.stats.all.squad,
+                },
+            },
+            status: stats.status
+        })
         return NextResponse.json({
             ...stats,
             ...stats.data,
