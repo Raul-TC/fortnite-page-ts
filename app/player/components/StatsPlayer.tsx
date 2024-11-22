@@ -1,8 +1,7 @@
 'use client'
 import { ModeStatsMenu } from '../../components/ModeStatsMenu'
-import { Account, All, BattlePass, CombinedStats, CustomStats } from '../../api/stats'
+import { CustomStats } from '../../api/stats'
 import { Suspense, useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import SkeletonStats from '@/app/components/SkeletonStats'
 
 
@@ -18,7 +17,7 @@ const StatsPlayer = ({ initialStats, name, account }: { initialStats: CustomStat
             if (name === '' || account === '') return
             try {
                 setLoading(true)
-                setError(null) // Reinicia el error
+                // setError(null) // Reinicia el error
                 const response = await fetch(`/api/player-stats/${name}/${account}`);
 
                 if (!response.ok) {
