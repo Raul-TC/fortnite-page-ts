@@ -37,8 +37,8 @@ const useSearch = () => {
 
         params.set('name', stats.user)
         params.set('accountType', stats.type)
-        setStats({ ...stats, isEmpty: false })
-        router.push(`${pathname}?${params.toString()}`,)
+        router.replace(`${pathname}?${params.toString()}`)
+
         // router.refresh()
 
 

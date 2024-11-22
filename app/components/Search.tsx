@@ -3,6 +3,7 @@ import epic from '../assets/epicLogo.svg'
 import xbox from '../assets/xboxLogo.svg'
 import ps5 from '../assets/ps5Logo.svg'
 import useSearch from '../hooks/useSearch'
+import Link from 'next/link'
 
 
 const Search = () => {
@@ -18,7 +19,9 @@ const Search = () => {
         <form className='w-full' onSubmit={handleSubmit}>
             <div className='flex justify-between gap-4 my-4 w-full md:w-1/2 mx-auto'>
                 <input type='search' className=' rounded-md pl-2 py-2 outline-none text-gray-500 md:w-full' placeholder={stats.user || 'lilRauw5505'} onChange={(e) => setStats({ ...stats, user: e.target.value })} value={stats.user} />
-                <button type='submit' disabled={isEmpty} className={` text-bg-header w-full md:w-28 rounded-md font-bold ${isEmpty ? 'bg-gray-500' : 'bg-yellowFortnite active:scale-95 cursor-pointer'} transition-transform ease-out duration-200`}>Buscar</button>
+                <Link href={`/player?name=${stats.user}&accountType=${stats.type}`}>
+                    <button disabled={isEmpty} className={` text-bg-header w-full md:w-28 rounded-md font-bold h-full ${isEmpty ? 'bg-gray-500' : 'bg-yellowFortnite active:scale-95 cursor-pointer'} transition-transform ease-out duration-200`}>Buscar</button>
+                </Link>
             </div>
             <div className='flex justify-between items-center gap-4 mt-2 w-1/2 md:w-[25%] m-auto'>
                 {logos.map(logo => (

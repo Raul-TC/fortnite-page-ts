@@ -48,13 +48,15 @@ export default async function ({ searchParams }: PlayerProps) {
         <>
             <h1 className='text-center text-xl font-bold md:text-4xl'>Buscar mis Estadísticas 🎯</h1>
             <div className='flex justify-center items-center flex-wrap m-auto gap-2 text-center'>
-                <Search />
+                <Suspense key={crypto.randomUUID()} fallback={<SkeletonStats />}>
+                    <Search />
+                </Suspense>
                 {/* {error && <h2>{error}</h2>} */}
                 {initialStats ?
 
-                    <Suspense fallback={<SkeletonStats />}>
-                        <StatsPlayer initialStats={initialStats} />
-                    </Suspense>
+                    // <Suspense key={crypto.randomUUID()} fallback={<SkeletonStats />}>
+                    <StatsPlayer initialStats={initialStats} name={name} account={accountType} />
+                    // </Suspense>
                     :
                     <h2 className='text-center mt-4 text-2xl md:text-3xl'>{error || 'Ingresa tu TagName y Selecciona la plataforma'}</h2>
                 }

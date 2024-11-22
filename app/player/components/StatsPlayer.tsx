@@ -6,20 +6,20 @@ import { useSearchParams } from 'next/navigation'
 import SkeletonStats from '@/app/components/SkeletonStats'
 
 
-const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
+const StatsPlayer = ({ initialStats, name, account }: { initialStats: CustomStats, name: string, account: string }) => {
     const [playerStats, setPlayerStats] = useState<CustomStats>(initialStats || null)
     const [loading, setLoading] = useState(false)
-    const params = useSearchParams()
-    const name = params.get('name')
-    const accountType = params.get('accountType')
+
     const [error, setError] = useState(false)
     useEffect(() => {
-        if (!name || !accountType) return
+        if (!name || !account) return
         const getPlayerStats = async () => {
-            setLoading(true)
-            if (name === '' || accountType === '') return
+
+            if (name === '' || account === '') return
             try {
-                const response = await fetch(`/api/player-stats/${name}/${accountType}`);
+                setLoading(true)
+                setError(null) // Reinicia el error
+                const response = await fetch(`/api/player-stats/${name}/${account}`);
 
                 if (!response.ok) {
                     throw new Error('Usuario no encontrado')
@@ -35,10 +35,9 @@ const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
                 setLoading(false)
             }
         }
-        // if (isSearchValid) {
         getPlayerStats(); // Llama a la función si los parámetros son válidos
 
-    }, [name, accountType])
+    }, [name, account])
 
     if (loading) {
         console.log('cargando')
@@ -46,8 +45,10 @@ const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
     }
     // if (!playerStats) return
 
-    if (error) { error && <h2>Usuario {name} no encontrado, verifica tu username y tu plataforma</h2> }
-
+    console.log({ error })
+    if (error) {
+        return <h2>Usuario {name} no encontrado, verifica tu username y tu plataforma</h2>
+    }
 
     return (
         <>
@@ -55,7 +56,7 @@ const StatsPlayer = ({ initialStats }: { initialStats: CustomStats }) => {
 
 
                 <div className='flex w-full mt-4 flex-col md:flex-row items-start justify-start flex-wrap self-start gap-4'>
-                    <Suspense fallback={<SkeletonStats />}>
+                    <Suspense key={`${name}-${account}`} fallback={<SkeletonStats />}>
                         <ModeStatsMenu stats={playerStats.stats} battlePass={playerStats.battlePass} account={playerStats.account?.name} />
                     </Suspense>
                 </div>
