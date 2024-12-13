@@ -6,20 +6,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.net.URI;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class HomePage {
@@ -33,17 +30,8 @@ public class HomePage {
 
     //Elements
     By rewardsBattlePassTitle = By.cssSelector("div + h2");
-    By paginationComponent = By.cssSelector("section + div");
     By arrows = By.cssSelector("section + div div[class=\"inline-flex\"] > a"); //1 is left arrow, 2 right arrow
     By numberBlocks = By.cssSelector("section + div a:not(:has(svg))");
-
-    private String getCurrentUrl() {
-        return webDriver.getCurrentUrl();
-    }
-
-    private Map<String, String> parseUrlParameters(String url) {
-        return getQueryParams(url);
-    }
 
     private static Map<String, String> getQueryParams(String url) {
         Map<String, String> queryPairs = new HashMap<>();
